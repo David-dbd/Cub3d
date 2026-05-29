@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 16:48:57 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/22 01:13:59 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/05/27 15:14:23 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	set_up_textures(t_game *the_game)
 	}
 }
 
-configure_mlx_set_up(t_game *the_game)
+int	configure_mlx_set_up(t_game *the_game)
 {
 	mlx_init();
 	the_game->mlx.win = mlx_new_window();

@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 22:32:31 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/21 17:58:16 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/05/27 15:04:49 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../utils/cub3d.h"
+#include "../../utils/cub3d.h"
 
 static int	copy_path(t_game *the_game, char *path, int index)
 {
@@ -41,11 +41,11 @@ static int	open_and_compare(char *line,char *orientation, char **path)
 	spaces_at_left = 0;
 	if (word_counter(line, 0) != 2)// "NO path.xpm hello bye.hello"
 		return (print_error(WRONG_P, LOCAL_ERROR));
-	spaces_at_left = ignore_spaces(line, 0, "right");
+	spaces_at_left = ignore_spaces(line, 0, 0);
 	if (ft_strncmp(line + spaces_at_left, orientation, 3) != 0) //we validate the ori.
 		return (print_error(WRONG_P, LOCAL_ERROR));
-	spaces_at_left = ignore_spaces(line, spaces_at_left + 3, "right"); //from "NO "
-	spaces_at_right = ignore_spaces(line, ft_strlen(line) - 1, "left");
+	spaces_at_left = ignore_spaces(line, spaces_at_left + 3, 0); //from "NO "
+	spaces_at_right = ignore_spaces(line, ft_strlen(line) - 1, 1);
 	*path = ft_substr(line, spaces_at_left, ft_strlen(line) - spaces_at_right);//we copy the path
 	if (!*path)
 		return (print_error(NULL, SYSTEM_CALL));

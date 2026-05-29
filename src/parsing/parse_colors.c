@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 20:57:19 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/04/17 22:59:11 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/05/27 15:05:53 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../utils/cub3d.h"
+#include "../../utils/cub3d.h"
 
 static int	check_colors_range(int r, int g, int b)
 {
@@ -53,11 +53,11 @@ static int	compare_colors(char *line, char **rgb_colors, char *letter)
 	spaces_at_left = 0;
 	if (word_counter(line, 0) != 2)// 
 		return (print_error(WRONG_C, LOCAL_ERROR));
-	spaces_at_left = ignore_spaces(line, 0, "right");// ignore initial potential spaces
+	spaces_at_left = ignore_spaces(line, 0, 0);// ignore initial potential spaces
 	if (ft_strncmp(line + spaces_at_left, letter, 3) != 0)
 		return (print_error(WRONG_C, LOCAL_ERROR));
-	spaces_at_left = ignore_spaces(line, spaces_at_left + 1, "right"); //from "F "
-	spaces_at_right = ignore_spaces(line, ft_strlen(line) - 1, "left");//igniore potential spaces
+	spaces_at_left = ignore_spaces(line, spaces_at_left + 1, 0); //from "F "
+	spaces_at_right = ignore_spaces(line, ft_strlen(line) - 1, 1);//igniore potential spaces
 	*rgb_colors = ft_substr(line, spaces_at_left, ft_strlen(line) - spaces_at_right);
 	if (!*rgb_colors)
 		return (print_error(NULL, SYSTEM_CALL));

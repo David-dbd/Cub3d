@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:41 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/21 16:08:31 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/05/27 15:13:56 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	validate_args(int argc, char **argv)
 {
 	if (argc != 2 || ft_strlen(argv[1]) < 4
 		|| ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4) != 0)
-		exit_error(NULL, WRONG_F, LOCAL_ERROR);
+		exit(print_error(WRONG_F, LOCAL_ERROR));
 }
 
 int	main(int argc, char **argv)
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 
 	the_game = (t_game){0};
 	validate_args(argc, argv);
-	parsing_engine(&the_game, argc, argv);
-	configure_mlx_set_up();
+	parsing_engine(&the_game, argv);
+	//configure_mlx_set_up(&the_game);
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 00:36:54 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/22 01:09:36 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:58:48 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../utils/cub3d.h"
+#include "../../utils/cub3d.h"
 
-void	find_direction(char letter, double *dir_x, double *dir_y)//remember the y axis is inverted
+static void	find_direction(char letter, double *dir_x, double *dir_y)//remember the y axis is inverted
 {
 	if (letter == 'N')
 	{
@@ -36,7 +36,7 @@ void	find_direction(char letter, double *dir_x, double *dir_y)//remember the y a
 	}
 }
 
-void	find_player(t_game *the_game, char **map, double *x, double *y)
+static void	find_player(t_game *the_game, char **map, double *x, double *y)
 {
 	int	line;
 	int	column;
@@ -60,7 +60,7 @@ void	find_player(t_game *the_game, char **map, double *x, double *y)
 	}
 }
 
-void	find_plane( double *plane_x, double *plane_y, double dir_x, double dir_y)
+static void	find_plane( double *plane_x, double *plane_y, double dir_x, double dir_y)
 {
 	double	fov;
 

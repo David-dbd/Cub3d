@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:19:00 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/04/17 20:52:50 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:55:03 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	exit_error(t_game *the_game)
 	exit(STDERR_FILENO);
 }
 
-int	print_error(const char error_message, int error_type)
+int	print_error(const char *error_message, int error_type)
 {
 	if (error_type == SYSTEM_CALL)
 		perror("Error: ");
