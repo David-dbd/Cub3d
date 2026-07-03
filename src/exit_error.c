@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:19:00 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/27 14:55:03 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/06/18 17:20:01 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 	specific error from the project so that we can know.
 
 	NOTE: Try to do the printf_fd so that it becomes more efficient
+	
+	FALTA LIMPIAR TODO. EL BOUNDS, TODOS LOS T_NAME QUE SEAN GENERADOS CON MALLOC
 */
 
 void	exit_error(t_game *the_game)
@@ -26,7 +28,7 @@ void	exit_error(t_game *the_game)
 	exit(STDERR_FILENO);
 }
 
-int	print_error(const char *error_message, int error_type)
+int	print_error(char *error_message, int error_type)
 {
 	if (error_type == SYSTEM_CALL)
 		perror("Error: ");

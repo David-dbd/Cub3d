@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 23:16:24 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/22 00:35:16 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/06/09 22:28:10 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define CUB3D_STRCUTS_H
 
 #include "cub3d.h"
+
+typedef struct s_rules
+{
+	int		player_counter;
+	int		full_lines;
+}	t_rules;
 
 //saves the image ptr, the addres to the pixel buffer and info of the pixels
 typedef struct s_img
@@ -32,11 +38,22 @@ typedef struct s_mlx
 	t_img	frame;
 }	t_mlx;
 
+typedef struct s_line_data
+{
+	int	line_start;// índice del primer carácter NO espacio
+	int	line_end;// índice del último carácter NO espacio
+	int	line_type;
+	int	line_counter;
+}	t_line_data;
+
 typedef struct s_map
 {
 	char	**grid;	// matriz del mapa
 	int		width;
 	int		height;
+	t_line_data	*lines;
+	int		global_start; // sistema de referencia global
+	int		global_end;
 }	t_map;
 
 //saves the ptr to the buffer that holds the actual image

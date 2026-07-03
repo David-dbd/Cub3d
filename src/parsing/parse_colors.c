@@ -6,11 +6,30 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 20:57:19 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/27 15:05:53 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/06/19 02:44:43 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../utils/cub3d.h"
+
+static int	delete_spaces(int *r, int *b, int *g, char **colors_arr)
+{
+	char	*trimmed;
+
+	trimmed = ft_strtrim(colors_arr[0], " ");
+	if (!trimmed)
+		return (ERROR);
+	*r = ft_atoi(trimmed);
+	free (trimmed);
+	trimmed = ft_strtrim(colors_arr[1], " ");
+	*g = ft_atoi(trimmed);
+	free (trimmed);
+	trimmed = ft_strtrim(colors_arr[2], " ");
+	*b = ft_atoi(trimmed); //liberar
+	free (trimmed);
+	
+	return (SUCCESS);
+}
 
 static int	check_colors_range(int r, int g, int b)
 {
@@ -33,13 +52,13 @@ static	int	only_numbers(const char *str)
 	coma_counter = 0;
 	while (str[i] != '\0')
 	{
-		if (!ft_isdigit(str[i]) && str[i] != ',')
+		if (!ft_isdigit(str[i]) && str[i] != ',' && str[i] != ' ')
 			return (0);
 		if (str[i] == ',')
 			coma_counter++;
 		i++;
 	}
-	if (coma_counter != 3)
+	if (coma_counter != 2)
 		return (0);
 	return (1);
 }
@@ -51,14 +70,14 @@ static int	compare_colors(char *line, char **rgb_colors, char *letter)
 	int		colors_len;
 
 	spaces_at_left = 0;
-	if (word_counter(line, 0) != 2)// 
+	if (word_counter(line, 0) != 4)// 
 		return (print_error(WRONG_C, LOCAL_ERROR));
 	spaces_at_left = ignore_spaces(line, 0, 0);// ignore initial potential spaces
-	if (ft_strncmp(line + spaces_at_left, letter, 3) != 0)
+	if (ft_strncmp(line + spaces_at_left, letter, 1) != 0)
 		return (print_error(WRONG_C, LOCAL_ERROR));
 	spaces_at_left = ignore_spaces(line, spaces_at_left + 1, 0); //from "F "
 	spaces_at_right = ignore_spaces(line, ft_strlen(line) - 1, 1);//igniore potential spaces
-	*rgb_colors = ft_substr(line, spaces_at_left, ft_strlen(line) - spaces_at_right);
+	*rgb_colors = ft_substr(line, spaces_at_left, spaces_at_right - spaces_at_left + 1);
 	if (!*rgb_colors)
 		return (print_error(NULL, SYSTEM_CALL));
 	colors_len = ft_strlen(*rgb_colors);
@@ -80,9 +99,12 @@ static int	copy_colors(t_game *the_game, char *rgb_colors, char *letter)
 	if (ft_count_str_in_arr(colors_arr) != 3)
 		return (free (rgb_colors), ft_free_str_array(&colors_arr),
 			print_error(WRONG_C, LOCAL_ERROR));
-	r = ft_atoi(colors_arr[0]);
-	g = ft_atoi(colors_arr[1]);
-	b = ft_atoi(colors_arr[2]);
+	if (delete_spaces(&r, &b, &g, colors_arr) == ERROR)
+	{
+		printf("aquiiiiiii");
+		return (free (rgb_colors), ft_free_str_array(&colors_arr),
+			print_error(WRONG_C, LOCAL_ERROR));
+	}
 	if (!check_colors_range(r, g, b))
 		return (free (rgb_colors), ft_free_str_array(&colors_arr),
 			print_error(WRONG_C, LOCAL_ERROR));
@@ -104,6 +126,7 @@ int	parse_colors(t_game *the_game, int cub_fd)
 	int		error_track;
 
 	index = 0;
+	rgb_colors = NULL;
 	while ((line = get_next_line(cub_fd)) != NULL && index < 2)
 	{
 		error_track = compare_colors(line, &rgb_colors, letter[index]);
@@ -111,15 +134,14 @@ int	parse_colors(t_game *the_game, int cub_fd)
 			return (error_track);
 		error_track = copy_colors(the_game, rgb_colors, letter[index]);
 		if (error_track != SUCCESS)
-			return (free (line),free (rgb_colors), error_track);
+			return (free (line), error_track);
 		free (line);
-		free (rgb_colors);
 		line = NULL;
 		index++;
 	}
 	if (!line && !index)
 		return (print_error(EMPTY_FILE, LOCAL_ERROR));
 	if (index != 2)
-		return (free (line), free (rgb_colors), print_error(WRONG_C, LOCAL_ERROR));
+		return (free (line), print_error(WRONG_C, LOCAL_ERROR));
 	return (SUCCESS);
 }

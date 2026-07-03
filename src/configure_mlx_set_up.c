@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 16:48:57 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/27 15:14:23 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/06/10 00:22:56 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	set_up_textures(t_game *the_game)
 	i = 0;
 	while (i < 4)
 	{
-		the_game->textures[i] = mlx_xpm_file_to_image(the_game->mlx.mlx,
+		the_game->textures[i].img.img = mlx_xpm_file_to_image(the_game->mlx.mlx,
 			the_game->config.path[i], &the_game->textures[i].width,
 			&the_game->textures[i].height);
 		if (!&the_game->textures[i].img)

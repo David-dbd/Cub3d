@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 22:32:31 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/27 15:04:49 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/06/13 22:15:53 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	open_and_compare(char *line,char *orientation, char **path)
 {
 	int		spaces_at_left;
 	int		spaces_at_right;
-	int		path_fd;
+	//int		path_fd;
 	int		path_len;
 
 	spaces_at_left = 0;
@@ -46,22 +46,25 @@ static int	open_and_compare(char *line,char *orientation, char **path)
 		return (print_error(WRONG_P, LOCAL_ERROR));
 	spaces_at_left = ignore_spaces(line, spaces_at_left + 3, 0); //from "NO "
 	spaces_at_right = ignore_spaces(line, ft_strlen(line) - 1, 1);
-	*path = ft_substr(line, spaces_at_left, ft_strlen(line) - spaces_at_right);//we copy the path
+	*path = ft_substr(line, spaces_at_left, spaces_at_right - spaces_at_left + 1);//we copy the path
 	if (!*path)
 		return (print_error(NULL, SYSTEM_CALL));
 	path_len = ft_strlen(*path);
 	if (path_len < 5
-		|| ft_strncmp(*path + path_len - 4, ".xpm", 4) != 0)
+		|| ft_strncmp(*path + path_len - 4, ".png", 4) != 0)
 		return (free(*path), print_error(WRONG_P, LOCAL_ERROR));
-	if ((path_fd = open(*path, O_RDONLY)) == -1)
-		return (free(*path), SYSTEM_CALL);
-	close(path_fd);
+	//if ((path_fd = open(*path, O_RDONLY)) == -1)
+	//{
+	//	printf("fallo aqui!\n\n");
+	//	return (free(*path), SYSTEM_CALL);
+	//}
+	//close(path_fd);
 	return (SUCCESS);
 }
 
 int	parse_paths(t_game *the_game, int cub_fd)
 {
-	char	*orientation[4] = {"NO ", "SO ", "WE ", "ES "};
+	char	*orientation[4] = {"NO ", "SO ", "WE ", "EA "};
 	char	*line;
 	char	*path;
 	int		index;

@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 22:39:06 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/29 01:51:56 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/04 00:41:38 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 	Detects a wall is always 1's and counts it. There should always be 2 full_l
 */
 
-static int	is_full_line(char *line, int *full_lines)
+static int	is_full_line(char *line, int distance, int *full_lines)
 {
 	int	i;
 
 	i = 0;
-	while (line[i] != '\0')
+	while (i < distance)
 	{
-		if (line[i] != '1')
+		if (line[i] != '1' && line[i] != ' ') //space is valid. We only check for 0's ->leaks
 			return (FALSE);
 		i++;
 	}
@@ -38,28 +38,26 @@ static int	is_full_line(char *line, int *full_lines)
 	If a line is already full then we return
 */
 
-static int	is_middle_line(char *line, int *full_lines, int line_type, int *player_count)
+static int	is_middle_line(char *line, int *line_type, int distance, t_rules *rules)
 {
 	int	i;
-	int	len;
 
 	i = 0;
-	len = ft_strlen(line);
-	if (line_type == FULL_LINE || (line_type == FALSE && *full_lines == 0))
+	if (*line_type == TOP_LINE || *line_type == BOTTOM_LINE || (*line_type == FALSE && rules->full_lines == 0)) //maybe it is never FULL_LINE to begin with. first condition
 		return (FALSE);
-	while (line[i] != '\0')
+	while (i < distance)
 	{
-		if ((i == 0 && line[i] != '1') || (i == len - 1 && line[i] != '1'))
+		if ((i == 0 && line[i] != '1') || (i == distance - 1 && line[i] != '1')) //if it's not contained between 1's is FALSE
 			return (FALSE);
-		if ((i > 0 && i < len - 1) && (line[i] != '0' && line[i] != '1'))
+		if ((i > 0 && i < distance - 1) && (line[i] != '0' && line[i] != '1' && line[i] != ' ')) //we are letting spaces slide for now. We'll check them later
 		{
 			if (line[i] != 'N' && line[i] != 'E' && line[i] != 'S' && line[i] != 'W')
 				return (FALSE);
 			else
 			{
-				if (*player_count == 1)
+				if (rules->player_counter == 1)
 					return (FALSE);
-				(*player_count)++;
+				(rules->player_counter)++;
 			}
 		}
 		i++;
@@ -76,64 +74,59 @@ static int	is_middle_line(char *line, int *full_lines, int line_type, int *playe
 	read is wrong
 */
 
-static int	examine_line(char **map_line, int *full_lines, int *player_count)
+static int	examine_line(char *map_line, int *line_type, t_rules *rules)
 {
-	int	line_type;
-
-	line_type = FALSE; //ignore_spaces
-	if (is_full_line(*map_line, full_lines))
-		line_type = FULL_LINE;
-	else if (is_middle_line(*map_line, full_lines, line_type, player_count))
-		line_type = MIDDLE_LINE;
-	if (line_type == FALSE)
-		return (print_error(WRONG_M, LOCAL_ERROR));
-	return (SUCCESS);
-}
-
-static int	extract_map_line(char **map_line, char *line)
-{
+	int len;
 	int	spaces_at_left;
 	int	spaces_at_right;
-	int	line_len;
+	int distance = 0;
 
-	spaces_at_left = 0;
-	if (word_counter(line, 0) != 1)// "111 111 111" pero verificar esto porque si que podría ser asi en algunos casos
-		return (print_error(WRONG_P, LOCAL_ERROR));
-	spaces_at_left = ignore_spaces(line, 0, 0);
-	spaces_at_right = ignore_spaces(line, ft_strlen(line) - 1, 1);
-	*map_line = ft_substr(line, spaces_at_left, ft_strlen(line) - spaces_at_right);
-	if (!*map_line)
-		return (print_error(NULL, SYSTEM_CALL));
-	line_len = ft_strlen(*map_line);
-	if (line_len < 3) //at least 111
-		return (print_error(WRONG_P, LOCAL_ERROR));
+	*line_type = FALSE;
+	len = ft_strlen(map_line);
+	if (len == 0) //check that is not empty
+		return (print_error(WRONG_M, LOCAL_ERROR));
+	spaces_at_left = ignore_spaces(map_line, 0, 0);
+	spaces_at_right = ignore_spaces(map_line, len - 1, 1);
+    distance = spaces_at_right - spaces_at_left + 1;
+	if (is_full_line(map_line + spaces_at_left, distance, &rules->full_lines))
+	{
+		if (rules->full_lines == 1)
+			*line_type = TOP_LINE;
+		else if (rules->full_lines >= 2)
+			*line_type = BOTTOM_LINE;
+	}
+	else if (is_middle_line(map_line + spaces_at_left, line_type, distance, rules))
+		*line_type = MIDDLE_LINE;
+	if (*line_type == FALSE)
+	{
+		printf("hellllloooo\n");
+		return (print_error(WRONG_M, LOCAL_ERROR));
+	}
 	return (SUCCESS);
 }
 
 int	parse_map(t_game *the_game, int fd)
 {
+	t_rules	rules;
 	char	*line;
-	int		full_lines;
 	int		index;
-	int		player_counter;
 
 	index = 0;
-	full_lines = 0;
-	player_counter = 0;
+	rules = (t_rules){0};
 	line = NULL;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		if (add_slot_arr(&the_game->map.grid, index) == ERROR)
+		if (add_slot_arr(&the_game->map.grid, &the_game->map.lines, index) == ERROR)
+			return (free(line), ERROR);
+		if (examine_line(line, &the_game->map.lines[index].line_type, &rules) == ERROR)
 			return (free(line), ERROR);
 		if (extract_map_line(&the_game->map.grid[index], line) == ERROR)
-			return (free(line), ERROR);
-		if (examine_line(&the_game->map.grid[index], &full_lines, &player_counter) == ERROR)
 			return (free(line), ERROR);
 		free (line);
 		index++;
 	}
-	if (full_lines != 2 || player_counter != 1)
-		return (free (line), print_error(WRONG_M, LOCAL_ERROR));
+	//if (examine_line(line, &the_game->map.lines->line_type, &rules) == ERROR)
+	//	return (free(line), ERROR);
 	if (calculate_width_height(&the_game->map) == ERROR)
 		return (free (line), print_error(WRONG_M, LOCAL_ERROR));
 	return (SUCCESS);
@@ -213,4 +206,20 @@ Y asi voy linea a linea. Si al final del dia todo era valido entonces guardare e
  de validacion direccional que podrá ser aplicado sobre los espacios del mapa y no sobre los espacios exteriores. Si todo esta 
  bien, entonces utilizo el mapa original para la mlx. Podría eliminar la copia editada sin espacios luego de eso o podría almacenar
  la si la llegase a necesitar en el futuro, da igual por ahora
+
+
+
+ PLAN: 
+ 1. Hayar el inicio absoluto y final absoluto
+ 2. Hayar el inicio y final de cada linea con la funcion de omitir espacios
+ 3. Iterar sobre el mapa buscando espacios.
+
+ Reglas de espacios:
+ * Si es la primera linea y esta antes del inicio entonces NO se revisa izquierda (0 - 1) ni tampoco arriba
+ * Si es la primera linea y esta después del final entonces NO se revisa derecha ni tampoco arriba
+ * Si es la ultima linea y esta antes del inicio entonces NO se revisa izquierda (0 - 1) ni tampoco abajo
+ * Si es la ultima linea y esta después del inicio entonces NO se revisa dercha ni tampoco abajo
+
+
+
 */

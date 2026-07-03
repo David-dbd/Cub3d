@@ -6,33 +6,41 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:11:57 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/28 10:05:23 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/04 01:03:11 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../utils/cub3d.h"
 
-int	ignore_spaces(char *line, int k, int direction)
+int ignore_spaces(char *line, int index, int direction)
 {
-	if (direction == 1)
+	if (direction == 0) // left to right
 	{
-		while (k > 0 && (line[k] == ' ' || line[k] == '\t'))
-			k--;
-		return (k);
+		while (line[index] == ' ' || line[index] == '\t'
+			|| line[index] == '\n' || line[index] == '\r')
+			index++;
+		return (index);
 	}
-	while (line[k] != '\0' && (line[k] == ' ' || line[k] == '\t'))
-		k++;
-	return (k);
+	else // right to left
+	{
+		while (index >= 0 && (line[index] == ' ' || line[index] == '\t'
+			|| line[index] == '\n' || line[index] == '\r'))
+			index--;
+		return (index);
+	}
 }
 
-int	word_counter(char *line, int start)
+
+int word_counter(char *line, int start)
 {
-	int	count;
+	int count;
 
 	count = 0;
 	while (line[start] != '\0')
 	{
-		start = ignore_spaces(line, start, 0);
+		start = ignore_spaces(line, start, 0);  //usar índice absoluto
+		if (line[start] == '\0')
+			break;
 		count++;
 		while (line[start] != '\0' && line[start] != ' ' && line[start] != '\t')
 			start++;
@@ -40,7 +48,18 @@ int	word_counter(char *line, int start)
 	return (count);
 }
 
-int	add_slot_arr(char ***map, int index)
+t_line_data *add_line_slot(t_line_data *arr, int count)
+{
+	t_line_data	*new;
+
+	new = realloc(arr, sizeof(t_line_data) * (count + 1));
+	if (!new)
+		return (NULL);
+	new[count] = (t_line_data){0};
+	return (new);
+}
+
+int	add_slot_arr(char ***map, t_line_data **line, int index)
 {
 	char	**new;
 	int		i;
@@ -58,6 +77,9 @@ int	add_slot_arr(char ***map, int index)
 	new[index + 1] = NULL;
 	free (*map);
 	*map = new;
+	*line = add_line_slot(*line, index);
+	if (!*line)
+		return (print_error(NULL, SYSTEM_CALL), ERROR);
 	return (SUCCESS);
 }
 
