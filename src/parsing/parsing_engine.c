@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:01:27 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/06/18 17:23:19 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/11 01:50:59 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ static	void	close_error(int fd)
 	//exit_error(the_game);
 }
 
+/*
+	The order for the orientation arr is: NO, SO, WE, EA
+	The order for the colors are: F, C
+	Everytime we match a line with the orientation or color we change the
+	index from 1 to 0. This way, if there was a case of NO, NO, EA, EA, instead
+	of evaluating those lines later, we check that the flag == 1. If not, we
+	know is a duplicate
+*/
+
 void parsing_engine(t_game *the_game, char **argv)
 {
 	int	fd;
@@ -26,9 +35,7 @@ void parsing_engine(t_game *the_game, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		exit_error(the_game);
-	if (parse_paths(the_game, fd) != SUCCESS)
-		close_error(fd);
-	if (parse_colors(the_game, fd) != SUCCESS)
+	if (figure_sections(the_game, fd) != SUCCESS)
 		close_error(fd);
 	if (parse_map(the_game, fd) != SUCCESS)//we leave the map as it is
 		close_error(fd);

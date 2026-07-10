@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:47 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/03 21:10:28 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/11 01:19:38 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define WRONG_P							"\033[1;31mError: Wrong path\033[0m\n\n"
 # define WRONG_C							"\033[1;31mError: Wrong Colors\033[0m\n\n"
 # define WRONG_M							"\033[1;31mError: Wrong Map\033[0m\n\n"
+# define INVALID_C							"\033[1;31mError: Invalid Content\033[0m\n\n"
 # define EMPTY_FILE							"\033[1;31mError: Empty file\033[0m\n\n"
 # define MLX_ISSUE							"\033[1;31mError: MLX failed\033[0m\n\n"
 
@@ -55,6 +56,8 @@
 # define INSIDE_SPACE						5
 # define OUTSIDE_SPACE_RIGHT				6
 # define OUTSIDE_SPACE_LEFT					7
+# define PATH_LINE							8
+# define COLOR_LINE							9
 
 
 /* ************************************************************************** */
@@ -62,12 +65,13 @@
 /* ************************************************************************** */
 
 //parsing
-void parsing_engine(t_game *the_game, char **argv);
-int	parse_paths(t_game *the_game, int cub_fd);
-int	parse_map(t_game *the_game, int fd);
-int	parse_colors(t_game *the_game, int cub_fd);
+void	parsing_engine(t_game *the_game, char **argv);
+int		figure_sections(t_game *the_game, int cub_fd);
+int		parse_paths(t_game *the_game, char *line, int index);
+int		parse_map(t_game *the_game, int fd);
+int		parse_colors(t_game *the_game, char *line, int index);
 void	fill_out_player(t_game *the_game);
-int	extract_map_line(char **map_line, char *line);
+int		extract_map_line(char **map_line, char *line);
 
 //utils
 int	calculate_width_height(t_map *map);
@@ -78,8 +82,8 @@ int	ignore_spaces(char *line, int k, int direction);
 //search_engine
 void	start_search_system(t_game *the_game);
 void	search_system_engine(t_game *the_game);
-int		search_left(t_map *map, char *str, int space_index, int context);
-int		search_right(t_map *map, char *str, int space_index, int context);
+int		search_left(t_map *map, int line_index, int space_index, int context);
+int		search_right(t_map *map, int line_index, int space_index, int context);
 int		search_top(t_map *map, int space_index, t_line_data *lines, int context);
 int		search_bottom(t_map *map, int space_index, t_line_data *lines, int context);
 

@@ -6,20 +6,22 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:39:42 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/03 21:10:49 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/10 17:16:58 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../utils/cub3d.h"
 
-int	search_left(t_map *map, char *str, int space_index, int context)
+int	search_left(t_map *map, int line_index, int space_index, int context)
 {
-	int	i;
+	char	*str;
+	int		i;
 
 	i = space_index;
+	str = map->grid[line_index];
 	if (context == OUTSIDE_SPACE_LEFT)
 		return (IGNORE);
-	while (i > map->lines->line_start)
+	while (i > map->lines[line_index].line_start)
 	{
 		if (str[i] == '0' || ft_isalpha(str[i]))
 			return (ERROR);
@@ -30,13 +32,15 @@ int	search_left(t_map *map, char *str, int space_index, int context)
 	return (ERROR); //if it was an inside space or outside right space it should've found a 1
 }
 
-int	search_right(t_map *map, char *str, int space_index, int context)
+int	search_right(t_map *map, int line_index, int space_index, int context)
 {
-	int	i;
-	int	len;
+	char	*str;
+	int		i;
+	int		len;
 
 	i = space_index;
-	len = map->lines->line_end;
+	len = map->lines[line_index].line_end;
+	str = map->grid[line_index];
 	if (context == OUTSIDE_SPACE_RIGHT)
 		return (IGNORE);
 	while (i < len)

@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 17:19:20 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/03 21:10:55 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/10 17:33:23 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 
 static int	search_engine(t_game *the_game, int line_index, int space_index, int context)
 {
-	if (search_left(&the_game->map, the_game->map.grid[line_index], space_index, context) == ERROR)
-		return (print_error(WRONG_M, LOCAL_ERROR));
-	if (search_right(&the_game->map, the_game->map.grid[line_index], space_index, context) == ERROR) //un if dentro de cada uno para omitirlo si es cierto conexto
-		return (print_error(WRONG_M, LOCAL_ERROR));
+	if (search_left(&the_game->map, line_index, space_index, context) == ERROR)
+		return (print_error("ERROR EN ORIENT", LOCAL_ERROR));
+	if (search_right(&the_game->map, line_index, space_index, context) == ERROR) //un if dentro de cada uno para omitirlo si es cierto conexto
+		return (print_error("ERROR EN ORIENT", LOCAL_ERROR));
 	if (search_top(&the_game->map, space_index, &the_game->map.lines[line_index], context) == ERROR)
-		return (print_error(WRONG_M, LOCAL_ERROR));
+		return (print_error("ERROR EN ORIENT", LOCAL_ERROR));
 	if (search_bottom(&the_game->map, space_index, &the_game->map.lines[line_index], context) == ERROR)
-		return (print_error(WRONG_M, LOCAL_ERROR));
+		return (print_error("ERROR EN ORIENT", LOCAL_ERROR));
 	return (SUCCESS);
 }
 

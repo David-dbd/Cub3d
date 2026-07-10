@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 20:57:19 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/06/19 02:44:43 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/11 01:18:22 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,23 @@ static int	copy_colors(t_game *the_game, char *rgb_colors, char *letter)
 	return (SUCCESS);
 }
 
+int	parse_colors(t_game *the_game, char *line, int index)
+{
+	char	*letter[2] = {"F", "C"};
+	char	*rgb_colors;
+	int		error_track;
+
+	rgb_colors = NULL;
+	error_track = compare_colors(line, &rgb_colors, letter[index]);
+	if (error_track != SUCCESS)
+		return (error_track);
+	error_track = copy_colors(the_game, rgb_colors, letter[index]);
+	if (error_track != SUCCESS)
+		return (error_track);
+	return (SUCCESS);
+}
+
+/*
 int	parse_colors(t_game *the_game, int cub_fd)
 {
 	char	*letter[2] = {"F", "C"};
@@ -144,4 +161,4 @@ int	parse_colors(t_game *the_game, int cub_fd)
 	if (index != 2)
 		return (free (line), print_error(WRONG_C, LOCAL_ERROR));
 	return (SUCCESS);
-}
+}*/

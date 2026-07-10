@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 22:32:31 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/06/13 22:15:53 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/11 01:10:47 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,23 @@ static int	open_and_compare(char *line,char *orientation, char **path)
 	return (SUCCESS);
 }
 
-int	parse_paths(t_game *the_game, int cub_fd)
+int parse_paths(t_game *the_game, char *line, int index)
 {
 	char	*orientation[4] = {"NO ", "SO ", "WE ", "EA "};
-	char	*line;
 	char	*path;
-	int		index;
 	int		error_track;
 
-	index = 0;
+	error_track = open_and_compare(line, orientation[index], &path);
+	if (error_track != SUCCESS)
+		return (error_track);
+	error_track = copy_path(the_game, path, index);
+	if (error_track != SUCCESS)
+		return (free(path), error_track);
+	free(path);
+	return (SUCCESS);
+}
+
+	/*
 	while ((line = get_next_line(cub_fd)) != NULL && index < 4)
 	{
 		error_track = open_and_compare(line, orientation[index], &path);
@@ -89,4 +97,5 @@ int	parse_paths(t_game *the_game, int cub_fd)
 	if (index != 4)//in case there wasnt all 4 lines
 		return (free (line),free (path), print_error(WRONG_F, LOCAL_ERROR));
 	return (SUCCESS);
-}
+	*/
+

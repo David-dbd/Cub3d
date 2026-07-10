@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:11:57 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/04 01:03:11 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/10 16:44:09 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int ignore_spaces(char *line, int index, int direction)
 {
-	if (direction == 0) // left to right
+	if (direction == 0) // left to right -> ->
 	{
 		while (line[index] == ' ' || line[index] == '\t'
 			|| line[index] == '\n' || line[index] == '\r')
 			index++;
 		return (index);
 	}
-	else // right to left
+	else // right to left <- <-
 	{
 		while (index >= 0 && (line[index] == ' ' || line[index] == '\t'
 			|| line[index] == '\n' || line[index] == '\r'))

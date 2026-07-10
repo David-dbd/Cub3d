@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 22:39:06 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/04 00:41:38 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/10 17:49:38 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	examine_line(char *map_line, int *line_type, t_rules *rules)
 		return (print_error(WRONG_M, LOCAL_ERROR));
 	spaces_at_left = ignore_spaces(map_line, 0, 0);
 	spaces_at_right = ignore_spaces(map_line, len - 1, 1);
-    distance = spaces_at_right - spaces_at_left + 1;
+	distance = spaces_at_right - spaces_at_left + 1;
 	if (is_full_line(map_line + spaces_at_left, distance, &rules->full_lines))
 	{
 		if (rules->full_lines == 1)
