@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 20:57:19 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 01:18:22 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/11 19:12:22 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,6 @@ static int	delete_spaces(int *r, int *b, int *g, char **colors_arr)
 	free (trimmed);
 	
 	return (SUCCESS);
-}
-
-static int	check_colors_range(int r, int g, int b)
-{
-	if (!(r >= 0 && r <= 255) || !(g >= 0 && g <= 255) || !(b >= 0 && b <= 255))
-		return (0);
-	return (1);
 }
 
 /*
@@ -65,19 +58,19 @@ static	int	only_numbers(const char *str)
 
 static int	compare_colors(char *line, char **rgb_colors, char *letter)
 {
-	int		spaces_at_left;
-	int		spaces_at_right;
+	int		spaces_left;
+	int		spaces_right;
 	int		colors_len;
 
-	spaces_at_left = 0;
+	spaces_left = 0;
 	if (word_counter(line, 0) != 4)// 
 		return (print_error(WRONG_C, LOCAL_ERROR));
-	spaces_at_left = ignore_spaces(line, 0, 0);// ignore initial potential spaces
-	if (ft_strncmp(line + spaces_at_left, letter, 1) != 0)
+	spaces_left = ignore_spaces(line, 0, 0);// ignore initial potential spaces
+	if (ft_strncmp(line + spaces_left, letter, 1) != 0)
 		return (print_error(WRONG_C, LOCAL_ERROR));
-	spaces_at_left = ignore_spaces(line, spaces_at_left + 1, 0); //from "F "
-	spaces_at_right = ignore_spaces(line, ft_strlen(line) - 1, 1);//igniore potential spaces
-	*rgb_colors = ft_substr(line, spaces_at_left, spaces_at_right - spaces_at_left + 1);
+	spaces_left = ignore_spaces(line, spaces_left + 1, 0); //from "F "
+	spaces_right = ignore_spaces(line, ft_strlen(line) - 1, 1);//igniore potential spaces
+	*rgb_colors = ft_substr(line, spaces_left, spaces_right - spaces_left + 1);
 	if (!*rgb_colors)
 		return (print_error(NULL, SYSTEM_CALL));
 	colors_len = ft_strlen(*rgb_colors);
@@ -101,7 +94,6 @@ static int	copy_colors(t_game *the_game, char *rgb_colors, char *letter)
 			print_error(WRONG_C, LOCAL_ERROR));
 	if (delete_spaces(&r, &b, &g, colors_arr) == ERROR)
 	{
-		printf("aquiiiiiii");
 		return (free (rgb_colors), ft_free_str_array(&colors_arr),
 			print_error(WRONG_C, LOCAL_ERROR));
 	}

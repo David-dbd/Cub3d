@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:11:57 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/10 16:44:09 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/11 19:08:51 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_line_data *add_line_slot(t_line_data *arr, int count)
 	return (new);
 }
 
-int	add_slot_arr(char ***map, t_line_data **line, int index)
+int	add_slot(char ***map, t_line_data **line, int index)
 {
 	char	**new;
 	int		i;

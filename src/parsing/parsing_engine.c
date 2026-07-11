@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:01:27 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 01:50:59 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/11 19:11:22 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,5 @@ void parsing_engine(t_game *the_game, char **argv)
 		close_error(fd);
 	close(fd);
 	start_search_system(the_game);
-	//if (the_game->game_mode == 1)
-	//{
-	//	if (parse_map_basic(the_game, fd) != SUCCESS)//we leave the map as it is
-	//		close_error(the_game, fd);
-	//}
-	//else if (the_game->game_mode == 2)//we edit the map to make it work
-	//{
-	//	if (parse_map_premium(the_game, fd) != SUCCESS)
-	//		close_error(the_game, fd);
-	//}
 	//fill_out_player(the_game); we CANT do that yet because we dont know if the map is valid yet
 }

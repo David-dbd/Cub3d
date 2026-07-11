@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 22:39:06 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/10 17:49:38 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/11 19:08:42 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,23 @@ static int	is_full_line(char *line, int distance, int *full_lines)
 	If a line is already full then we return
 */
 
-static int	is_middle_line(char *line, int *line_type, int distance, t_rules *rules)
+static int	is_mid_line(char *line, int *line_type, int distan, t_rules *rules)
 {
 	int	i;
 
 	i = 0;
-	if (*line_type == TOP_LINE || *line_type == BOTTOM_LINE || (*line_type == FALSE && rules->full_lines == 0)) //maybe it is never FULL_LINE to begin with. first condition
+	if (*line_type == TOP_LINE || *line_type == BOTTOM_LINE 
+		|| (*line_type == FALSE && rules->full_lines == 0)) //maybe it is never FULL_LINE to begin with. first condition
 		return (FALSE);
-	while (i < distance)
+	while ((i++) < distan)
 	{
-		if ((i == 0 && line[i] != '1') || (i == distance - 1 && line[i] != '1')) //if it's not contained between 1's is FALSE
+		if ((i == 0 && line[i] != '1') || (i == distan - 1 && line[i] != '1')) //if it's not contained between 1's is FALSE
 			return (FALSE);
-		if ((i > 0 && i < distance - 1) && (line[i] != '0' && line[i] != '1' && line[i] != ' ')) //we are letting spaces slide for now. We'll check them later
+		if ((i > 0 && i < distan - 1) 
+			&& (line[i] != '0' && line[i] != '1' && line[i] != ' ')) //we are letting spaces slide for now. We'll check them later
 		{
-			if (line[i] != 'N' && line[i] != 'E' && line[i] != 'S' && line[i] != 'W')
+			if (line[i] != 'N' && line[i] != 'E' && line[i] != 'S' 
+					&& line[i] != 'W')
 				return (FALSE);
 			else
 			{
@@ -60,7 +63,6 @@ static int	is_middle_line(char *line, int *line_type, int distance, t_rules *rul
 				(rules->player_counter)++;
 			}
 		}
-		i++;
 	}
 	return (TRUE);
 }
@@ -74,7 +76,7 @@ static int	is_middle_line(char *line, int *line_type, int distance, t_rules *rul
 	read is wrong
 */
 
-static int	examine_line(char *map_line, int *line_type, t_rules *rules)
+static int	check_line(char *map_line, int *line_type, t_rules *rules)
 {
 	int len;
 	int	spaces_at_left;
@@ -95,13 +97,10 @@ static int	examine_line(char *map_line, int *line_type, t_rules *rules)
 		else if (rules->full_lines >= 2)
 			*line_type = BOTTOM_LINE;
 	}
-	else if (is_middle_line(map_line + spaces_at_left, line_type, distance, rules))
+	else if (is_mid_line(map_line + spaces_at_left, line_type, distance, rules))
 		*line_type = MIDDLE_LINE;
 	if (*line_type == FALSE)
-	{
-		printf("hellllloooo\n");
 		return (print_error(WRONG_M, LOCAL_ERROR));
-	}
 	return (SUCCESS);
 }
 
@@ -116,9 +115,9 @@ int	parse_map(t_game *the_game, int fd)
 	line = NULL;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		if (add_slot_arr(&the_game->map.grid, &the_game->map.lines, index) == ERROR)
+		if (add_slot(&the_game->map.grid, &the_game->map.lines, index) == ERROR)
 			return (free(line), ERROR);
-		if (examine_line(line, &the_game->map.lines[index].line_type, &rules) == ERROR)
+		if (check_line(line, &the_game->map.lines[index].line_type, &rules) == ERROR)
 			return (free(line), ERROR);
 		if (extract_map_line(&the_game->map.grid[index], line) == ERROR)
 			return (free(line), ERROR);

@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 22:32:31 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 01:10:47 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/11 19:06:11 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,20 @@ static int	copy_path(t_game *the_game, char *path, int index)
 
 static int	open_and_compare(char *line,char *orientation, char **path)
 {
-	int		spaces_at_left;
-	int		spaces_at_right;
+	int		spaces_left;
+	int		spaces_right;
 	//int		path_fd;
 	int		path_len;
 
-	spaces_at_left = 0;
+	spaces_left = 0;
 	if (word_counter(line, 0) != 2)// "NO path.xpm hello bye.hello"
 		return (print_error(WRONG_P, LOCAL_ERROR));
-	spaces_at_left = ignore_spaces(line, 0, 0);
-	if (ft_strncmp(line + spaces_at_left, orientation, 3) != 0) //we validate the ori.
+	spaces_left = ignore_spaces(line, 0, 0);
+	if (ft_strncmp(line + spaces_left, orientation, 3) != 0) //we validate the ori.
 		return (print_error(WRONG_P, LOCAL_ERROR));
-	spaces_at_left = ignore_spaces(line, spaces_at_left + 3, 0); //from "NO "
-	spaces_at_right = ignore_spaces(line, ft_strlen(line) - 1, 1);
-	*path = ft_substr(line, spaces_at_left, spaces_at_right - spaces_at_left + 1);//we copy the path
+	spaces_left = ignore_spaces(line, spaces_left + 3, 0); //from "NO "
+	spaces_right = ignore_spaces(line, ft_strlen(line) - 1, 1);
+	*path = ft_substr(line, spaces_left, spaces_right - spaces_left + 1);//we copy the path
 	if (!*path)
 		return (print_error(NULL, SYSTEM_CALL));
 	path_len = ft_strlen(*path);

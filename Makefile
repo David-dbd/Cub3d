@@ -6,7 +6,7 @@
 #    By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/27 14:32:50 by davdiaz-          #+#    #+#              #
-#    Updated: 2026/07/11 01:18:49 by davdiaz-         ###   ########.fr        #
+#    Updated: 2026/07/11 19:13:07 by davdiaz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,10 @@ src/exit_error.c \
 src/init_data.c \
 src/parsing/parsing_engine.c \
 src/parsing/figure_sections.c \
+src/parsing/utils_figure_sections.c \
 src/parsing/parse_paths.c \
 src/parsing/parse_colors.c \
+src/parsing/utils_colors.c \
 src/parsing/parse_map.c \
 src/parsing/extract_map_line.c \
 src/parsing/fill_out_player.c \

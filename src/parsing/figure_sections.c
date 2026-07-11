@@ -6,33 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 01:05:59 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 01:49:37 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/11 19:01:59 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../utils/cub3d.h"
-
-int	get_path_index(char *line)
-{
-	if (ft_charstr_match(line, "NO "))
-		return (0);
-	if (ft_charstr_match(line, "SO "))
-		return (1);
-	if (ft_charstr_match(line, "WE "))
-		return (2);
-	if (ft_charstr_match(line, "EA "))
-		return (3);
-	return (-1);
-}
-
-int	get_color_index(char *line)
-{
-	if (ft_charstr_match(line, "F "))
-		return (0);
-	if (ft_charstr_match(line, "C "))
-		return (1);
-	return (-1);
-}
 
 static int	recognize_line(char *line, int *orientation_flag, int *colors_flag)
 {
@@ -112,14 +90,15 @@ int	figure_sections(t_game *the_game, int cub_fd)
 	char	*line;
 	int		result;
 	int		index;
-	int		orientation_flag[4] = {1, 1, 1, 1};
+	int		orien_flag[4] = {1, 1, 1, 1};
 	int		colors_flag[2] = {1, 1};
 
 	index = 0;
 	line = NULL;
-	while (check_flags(orientation_flag, colors_flag) && (line = get_next_line(cub_fd)) != NULL)
+	while (check_flags(orien_flag, colors_flag) 
+		&& (line = get_next_line(cub_fd)) != NULL)
 	{
-		result = recognize_line(line, orientation_flag, colors_flag);
+		result = recognize_line(line, orien_flag, colors_flag);
 		if (result == PATH_LINE || result == COLOR_LINE)
 		{
 			if (parse_line(the_game, line, result) == ERROR)

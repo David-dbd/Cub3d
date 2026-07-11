@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:47 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 01:19:38 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/11 19:12:43 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,12 @@ int		extract_map_line(char **map_line, char *line);
 
 //utils
 int	calculate_width_height(t_map *map);
-int	add_slot_arr(char ***map, t_line_data **lines, int index);
+int	add_slot(char ***map, t_line_data **lines, int index);
 int	word_counter(char *line, int start);
 int	ignore_spaces(char *line, int k, int direction);
+int	get_path_index(char *line);
+int	get_color_index(char *line);
+int	check_colors_range(int r, int g, int b);
 
 //search_engine
 void	start_search_system(t_game *the_game);
