@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 11:21:35 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 12:04:47 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 00:23:23 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	*build_row_lengths(char **grid, int height)
 	return (lengths);
 }
 
-int	build_scene(t_game *the_game, t_cub3d_scene *scene)
+void	build_scene(t_game *the_game, t_cub3d_scene *scene)
 {
 	scene->map = the_game->map.grid;
 	scene->map_width = the_game->map.width;
@@ -37,7 +37,10 @@ int	build_scene(t_game *the_game, t_cub3d_scene *scene)
 	scene->row_lengths = build_row_lengths(the_game->map.grid,
 			the_game->map.height);
 	if (!scene->row_lengths)
-		return (print_error(NULL, SYSTEM_CALL));
+	{
+		print_error(NULL, SYSTEM_CALL);
+		exit_error(the_game);
+	}
 	scene->textures[CUB3D_TEX_NO] = the_game->config.path[0];
 	scene->textures[CUB3D_TEX_SO] = the_game->config.path[1];
 	scene->textures[CUB3D_TEX_WE] = the_game->config.path[2];
@@ -49,5 +52,4 @@ int	build_scene(t_game *the_game, t_cub3d_scene *scene)
 	scene->player_dir = the_game->player.start_dir;
 	scene->screen_width = 0;   // 0 -> el motor aplica CUB3D_DEFAULT_WIDTH/HEIGHT
 	scene->screen_height = 0;
-	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:47 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 11:35:40 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 00:23:10 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "cub3d_structs.h"
 # include "cub3d_engine.h"
 # include "../lib/libft_plus/libft_plus.h"
-//# include "../lib/libft_plus/ft_printf_fd.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -88,18 +87,17 @@ void	start_search_system(t_game *the_game);
 void	search_system_engine(t_game *the_game);
 int		search_left(t_map *map, int line_index, int space_index, int context);
 int		search_right(t_map *map, int line_index, int space_index, int context);
-int		search_top(t_map *map, int space_index, t_line_data *lines, int context);
-int		search_bottom(t_map *map, int space_index, t_line_data *lines, int context);
-
+int		search_top(t_map *map, int space_inde, t_line_data *lines, int context);
+int		search_bottom(t_map *map, int space_i, t_line_data *lines, int context);
 
 //error
-int		print_error(char *error_message, int error_type);
 void	exit_error(t_game *the_game);
+int		print_error(char *error_message, int error_type);
 
 //init_data
 void	init_data(t_game *the_game);
-//int configure_mlx_set_up(t_game *the_game);
 
-int	build_scene(t_game *the_game, t_cub3d_scene *scene);
+//scene
+int		build_scene(t_game *the_game, t_cub3d_scene *scene);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:41 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 11:35:59 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 00:18:05 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int	main(int argc, char **argv)
 	init_data(&the_game);
 	validate_args(argc, argv);
 	parsing_engine(&the_game, argv);
-	fill_out_player(&the_game);
-	if (build_scene(&the_game, &scene) != SUCCESS)
-		return (ERROR);
+	build_scene(&the_game, &scene);
 	cub3d_engine_start(&scene);
 	free(scene.row_lengths);
 	return (0);

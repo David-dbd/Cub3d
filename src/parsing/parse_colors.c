@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 20:57:19 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 11:36:45 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 00:02:56 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int	delete_spaces(int *r, int *b, int *g, char **colors_arr)
 	trimmed = ft_strtrim(colors_arr[2], " ");
 	*b = ft_atoi(trimmed); //liberar
 	free (trimmed);
-	
 	return (SUCCESS);
 }
 
@@ -58,9 +57,9 @@ static	int	only_numbers(const char *str)
 
 static int	compare_colors(char *line, char **rgb_colors, char *letter)
 {
-	int		spaces_left;
-	int		spaces_right;
-	int		colors_len;
+	int	spaces_left;
+	int	spaces_right;
+	int	colors_len;
 
 	spaces_left = 0;
 	if (word_counter(line, 0) != 4)// 
@@ -105,8 +104,7 @@ static int	copy_colors(t_game *the_game, char *rgb_colors, char *letter)
 	else
 		the_game->config.ceiling_color = (r << 16) | (g << 8) | b;
 	ft_free_str_array(&colors_arr);
-	free (rgb_colors);
-	return (SUCCESS);
+	return (free (rgb_colors), SUCCESS);
 }
 
 int	parse_colors(t_game *the_game, char *line, int index)

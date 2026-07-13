@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:19:00 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 11:38:36 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 00:24:06 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,48 @@
 	FALTA LIMPIAR TODO. EL BOUNDS, TODOS LOS T_NAME QUE SEAN GENERADOS CON MALLOC
 */
 
+static void	free_map(t_map *map)
+{
+	int	i;
+
+	if (map->grid)
+	{
+		i = 0;
+		while (map->grid[i])
+		{
+			free(map->grid[i]);
+			i++;
+		}
+		free(map->grid);
+		map->grid = NULL;
+	}
+	free(map->lines);   // es un único bloque reallocado, no hay que iterar
+	map->lines = NULL;
+}
+
+static void	free_config(t_config *config)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (config->path[i])
+			free(config->path[i]);
+		config->path[i] = NULL;
+		i++;
+	}
+}
+
 void	exit_error(t_game *the_game)
 {
+	if (the_game->fd >= 0)
+		close(the_game->fd);
 	if (the_game)
-		free (the_game);
+	{
+		free_map(&the_game->map);
+		free_config(&the_game->config);
+	}
 	exit(STDERR_FILENO);
 }
 

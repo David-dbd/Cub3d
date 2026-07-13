@@ -6,18 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:01:27 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 11:36:19 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 00:23:45 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-static	void	close_error(int fd)
-{
-	close(fd);
-	exit(STDERR_FILENO);
-	//exit_error(the_game);
-}
 
 /*
 	The order for the orientation arr is: NO, SO, WE, EA
@@ -30,16 +23,15 @@ static	void	close_error(int fd)
 
 void parsing_engine(t_game *the_game, char **argv)
 {
-	int	fd;
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	the_game->fd = open(argv[1], O_RDONLY);
+	if (the_game->fd == -1)
 		exit_error(the_game);
-	if (figure_sections(the_game, fd) != SUCCESS)
-		close_error(fd);
-	if (parse_map(the_game, fd) != SUCCESS)//we leave the map as it is
-		close_error(fd);
-	close(fd);
+	if (figure_sections(the_game, the_game->fd) != SUCCESS)
+		exit_error(the_game);
+	if (parse_map(the_game, the_game->fd) != SUCCESS)//we leave the map as it is
+		exit_error(the_game);
+	close(the_game->fd);
+	the_game->fd = -1;
 	start_search_system(the_game);
-	//fill_out_player(the_game); we CANT do that yet because we dont know if the map is valid yet
+	fill_out_player(the_game);
 }

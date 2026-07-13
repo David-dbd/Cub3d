@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 22:32:31 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 12:09:24 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 23:59:41 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ static int	open_and_compare(char *line,char *orientation, char **path)
 		|| ft_strncmp(*path + path_len - 4, ".xpm", 4) != 0)
 		return (free(*path), print_error(WRONG_P, LOCAL_ERROR));
 	if ((path_fd = open(*path, O_RDONLY)) == -1)
-	{
-		printf("fallo aqui!\n\n");
 		return (free(*path), SYSTEM_CALL);
-	}
 	close(path_fd);
 	return (SUCCESS);
 }

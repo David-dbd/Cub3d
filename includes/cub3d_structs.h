@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 23:16:24 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 11:29:57 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 00:13:49 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef struct s_config
 	int		ceiling_color;
 }	t_config;
 
-
 typedef struct s_player
 {
 	double	x;
@@ -92,7 +91,7 @@ typedef struct s_game
 	t_player	player;
 	t_textures	textures[4];
 	t_config	config;
-	int			game_mode;
+	int			fd;
 }	t_game;
 
 #endif
