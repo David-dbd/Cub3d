@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 01:29:51 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/04 00:31:48 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:39:17 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 /*
 int	apply_system_search(char **new_map)
 {

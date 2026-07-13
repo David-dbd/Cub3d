@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:11:57 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 19:08:51 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:37:12 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int ignore_spaces(char *line, int index, int direction)
 {

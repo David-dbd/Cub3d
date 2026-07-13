@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 19:12:32 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 19:13:19 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:37:06 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	check_colors_range(int r, int g, int b)
 {

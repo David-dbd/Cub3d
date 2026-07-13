@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 22:39:06 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 19:08:42 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:36:48 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 
 /*
 	Detects a wall is always 1's and counts it. There should always be 2 full_l

@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:19:00 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/06/18 17:20:01 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:38:36 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../utils/cub3d.h"
+#include "../includes/cub3d.h"
 
 /*
 	Function to exit the program safely. It frees the memory and detects the

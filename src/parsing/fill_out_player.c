@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 00:36:54 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/27 14:58:48 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:36:41 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static void	find_direction(char letter, double *dir_x, double *dir_y)//remember the y axis is inverted
 {
@@ -42,16 +42,18 @@ static void	find_player(t_game *the_game, char **map, double *x, double *y)
 	int	column;
 
 	line = 0;
-	column = 0;
 	while (map[line])
 	{
-		while (map[column][line] != '\0')
+		column = 0;                         // <-- había que resetearlo cada fila
+		while (map[line][column] != '\0')   // <-- estaba map[column][line]
 		{
 			if (ft_isalpha(map[line][column]))
 			{
 				*x = column + 0.5;
 				*y = line + 0.5;
-				find_direction(map[line][column], &the_game->player.dir_x, &the_game->player.dir_y);
+				the_game->player.start_dir = map[line][column]; // <-- nuevo
+				find_direction(map[line][column],
+					&the_game->player.dir_x, &the_game->player.dir_y);
 				return ;
 			}
 			column++;

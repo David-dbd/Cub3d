@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 20:57:19 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 19:12:22 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:36:45 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static int	delete_spaces(int *r, int *b, int *g, char **colors_arr)
 {

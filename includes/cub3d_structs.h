@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 23:16:24 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/06/09 22:28:10 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:29:57 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	char	start_dir;
 }	t_player;
 
 //core structurre

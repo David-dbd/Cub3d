@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:47 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 19:12:43 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:35:40 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /* ************************************************************************** */
 
 # include "cub3d_structs.h"
+# include "cub3d_engine.h"
 # include "../lib/libft_plus/libft_plus.h"
 //# include "../lib/libft_plus/ft_printf_fd.h"
 # include <unistd.h>
@@ -99,5 +100,6 @@ void	exit_error(t_game *the_game);
 void	init_data(t_game *the_game);
 //int configure_mlx_set_up(t_game *the_game);
 
+int	build_scene(t_game *the_game, t_cub3d_scene *scene);
 
 #endif

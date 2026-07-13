@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:01:27 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 19:11:22 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:36:19 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static	void	close_error(int fd)
 {

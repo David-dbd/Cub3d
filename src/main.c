@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:41 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/06/19 00:55:53 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:35:59 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../utils/cub3d.h"
+#include "../includes/cub3d.h"
 
 static void	validate_args(int argc, char **argv)
 {
@@ -22,10 +22,16 @@ static void	validate_args(int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_game	the_game;
+	t_cub3d_scene	scene;
 
 	init_data(&the_game);
 	validate_args(argc, argv);
 	parsing_engine(&the_game, argv);
-	//configure_mlx_set_up(&the_game);
+	fill_out_player(&the_game);
+	if (build_scene(&the_game, &scene) != SUCCESS)
+		return (ERROR);
+	cub3d_engine_start(&scene);
+	free(scene.row_lengths);
 	return (0);
+	//configure_mlx_set_up(&the_game);
 }

@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 17:19:20 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 19:10:00 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:39:35 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 
 /*
 	Here we recieve the context of the space as well as the ptr to the space

@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_map_line.c                                 :+:      :+:    :+:   */
+/*   cub3d_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: pestelle <pestelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/30 02:00:32 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 11:36:27 by davdiaz-         ###   ########.fr       */
+/*   Created: 2026/05/28 00:00:00 by pestelle          #+#    #+#             */
+/*   Updated: 2026/05/28 00:00:00 by pestelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d_private.h"
 
-int	extract_map_line(char **map_line, char *line)
+int	cub3d_engine_start(t_cub3d_scene *scene)
 {
-	*map_line = ft_strdup(line); //maybe I should not copy the \n of each line
-	if (!*map_line)
-		return (print_error(NULL, SYSTEM_CALL));
-	return (SUCCESS);
+	t_cub3d_engine	*engine;
+
+	engine = NULL;
+	if (cub3d_engine_init(&engine, scene) != 0)
+		return (1);
+	cub3d_engine_run(engine);
+	cub3d_engine_destroy(engine);
+	return (0);
 }

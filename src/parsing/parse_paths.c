@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 22:32:31 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 19:06:11 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:36:59 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static int	copy_path(t_game *the_game, char *path, int index)
 {

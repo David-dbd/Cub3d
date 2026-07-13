@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:39:42 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 19:10:11 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:39:42 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	search_left(t_map *map, int line_index, int space_index, int context)
 {

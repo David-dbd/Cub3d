@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 19:01:31 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/11 19:02:04 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:37:09 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int	get_path_index(char *line)
 {
