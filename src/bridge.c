@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 11:21:35 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 11:37:19 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 12:04:47 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 static int	*build_row_lengths(char **grid, int height)
 {
