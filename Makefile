@@ -55,6 +55,7 @@ SRCS = \
 	$(SRC_DIR)/parsing/extract_map_line.c \
 	$(SRC_DIR)/parsing/fill_out_player.c \
 	$(SRC_DIR)/parsing/utils.c \
+	$(SRC_DIR)/bridge.c \
 	$(SRC_DIR)/system_search_engine/start_search_system.c \
 	$(SRC_DIR)/system_search_engine/apply_search_system.c \
 	$(SRC_DIR)/system_search_engine/orientation_search.c \
