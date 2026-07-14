@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 22:32:31 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 10:32:56 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:05:37 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	open_and_compare(char *line,char *orientation, char **path)
 	return (SUCCESS);
 }
 
-int parse_paths(t_game *the_game, char *line, int index)
+int	parse_paths(t_game *the_game, char *line, int index)
 {
 	char	*orientation[4] = {"NO ", "SO ", "WE ", "EA "};
 	char	*path;

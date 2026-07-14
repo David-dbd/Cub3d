@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:01:27 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 10:33:01 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:05:43 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 	know is a duplicate
 */
 
-void parsing_engine(t_game *the_game, char **argv)
+void	parsing_engine(t_game *the_game, char **argv)
 {
 	the_game->fd = open(argv[1], O_RDONLY);
 	if (the_game->fd == -1)
