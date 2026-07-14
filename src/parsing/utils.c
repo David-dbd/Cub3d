@@ -6,22 +6,27 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:11:57 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 10:33:16 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:45:59 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int ignore_spaces(char *line, int index, int direction)
-{
+/*
 	if (direction == 0) // left to right -> ->
+	else // right to left <- <-
+*/
+
+int	ignore_spaces(char *line, int index, int direction)
+{
+	if (direction == 0)
 	{
 		while (line[index] == ' ' || line[index] == '\t'
 			|| line[index] == '\n' || line[index] == '\r')
 			index++;
 		return (index);
 	}
-	else // right to left <- <-
+	else
 	{
 		while (index >= 0 && (line[index] == ' ' || line[index] == '\t'
 			|| line[index] == '\n' || line[index] == '\r'))
@@ -31,7 +36,7 @@ int ignore_spaces(char *line, int index, int direction)
 }
 
 
-int word_counter(char *line, int start)
+int	word_counter(char *line, int start)
 {
 	int count;
 
@@ -48,7 +53,7 @@ int word_counter(char *line, int start)
 	return (count);
 }
 
-t_line_data *add_line_slot(t_line_data *arr, int count)
+t_line_data	*add_line_slot(t_line_data *arr, int count)
 {
 	t_line_data	*new;
 
@@ -83,7 +88,7 @@ int	add_slot(char ***map, t_line_data **line, int index)
 	return (SUCCESS);
 }
 
-int calculate_width_height(t_map *map)
+int	calculate_width_height(t_map *map)
 {
 	int	i;
 	int	len;
