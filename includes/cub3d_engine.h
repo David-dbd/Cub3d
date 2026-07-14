@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_engine.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pestelle <pestelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 00:00:00 by pestelle          #+#    #+#             */
-/*   Updated: 2026/05/27 00:00:00 by pestelle         ###   ########.fr       */
+/*   Updated: 2026/07/14 12:53:07 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_ENGINE_H
 # define CUB3D_ENGINE_H
+
+# include "cub3d.h"
 
 # define CUB3D_DEFAULT_WIDTH 1280
 # define CUB3D_DEFAULT_HEIGHT 720
@@ -38,6 +40,7 @@ typedef struct s_cub3d_scene
 	char	player_dir;
 	int		screen_width;
 	int		screen_height;
+	t_game	*the_game;
 }	t_cub3d_scene;
 
 int		cub3d_engine_start(t_cub3d_scene *scene);

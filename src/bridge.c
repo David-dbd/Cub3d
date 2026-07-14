@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 11:21:35 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 10:34:19 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 12:53:32 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void	build_scene(t_game *the_game, t_cub3d_scene *scene)
 	scene->player_dir = the_game->player.start_dir;
 	scene->screen_width = 0;
 	scene->screen_height = 0;
+	scene->the_game = the_game;
 }
