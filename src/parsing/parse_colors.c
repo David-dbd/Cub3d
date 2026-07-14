@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 20:57:19 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 00:02:56 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:32:23 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	delete_spaces(int *r, int *b, int *g, char **colors_arr)
 	*g = ft_atoi(trimmed);
 	free (trimmed);
 	trimmed = ft_strtrim(colors_arr[2], " ");
-	*b = ft_atoi(trimmed); //liberar
+	*b = ft_atoi(trimmed);
 	free (trimmed);
 	return (SUCCESS);
 }
@@ -62,18 +62,18 @@ static int	compare_colors(char *line, char **rgb_colors, char *letter)
 	int	colors_len;
 
 	spaces_left = 0;
-	if (word_counter(line, 0) != 4)// 
+	if (word_counter(line, 0) != 4)
 		return (print_error(WRONG_C, LOCAL_ERROR));
-	spaces_left = ignore_spaces(line, 0, 0);// ignore initial potential spaces
+	spaces_left = ignore_spaces(line, 0, 0);
 	if (ft_strncmp(line + spaces_left, letter, 1) != 0)
 		return (print_error(WRONG_C, LOCAL_ERROR));
-	spaces_left = ignore_spaces(line, spaces_left + 1, 0); //from "F "
-	spaces_right = ignore_spaces(line, ft_strlen(line) - 1, 1);//igniore potential spaces
+	spaces_left = ignore_spaces(line, spaces_left + 1, 0);
+	spaces_right = ignore_spaces(line, ft_strlen(line) - 1, 1);
 	*rgb_colors = ft_substr(line, spaces_left, spaces_right - spaces_left + 1);
 	if (!*rgb_colors)
 		return (print_error(NULL, SYSTEM_CALL));
 	colors_len = ft_strlen(*rgb_colors);
-	if (colors_len < 5 || !only_numbers(*rgb_colors)) //RGB 0,0,0 or hello,120,130 or 111111 or -1,-12...
+	if (colors_len < 5 || !only_numbers(*rgb_colors))
 		return (free(*rgb_colors), print_error(WRONG_C, LOCAL_ERROR));
 	return (SUCCESS);
 }
@@ -122,33 +122,3 @@ int	parse_colors(t_game *the_game, char *line, int index)
 		return (error_track);
 	return (SUCCESS);
 }
-
-/*
-int	parse_colors(t_game *the_game, int cub_fd)
-{
-	char	*letter[2] = {"F", "C"};
-	char	*line;
-	char	*rgb_colors;
-	int		index;
-	int		error_track;
-
-	index = 0;
-	rgb_colors = NULL;
-	while ((line = get_next_line(cub_fd)) != NULL && index < 2)
-	{
-		error_track = compare_colors(line, &rgb_colors, letter[index]);
-		if (error_track != SUCCESS)
-			return (error_track);
-		error_track = copy_colors(the_game, rgb_colors, letter[index]);
-		if (error_track != SUCCESS)
-			return (free (line), error_track);
-		free (line);
-		line = NULL;
-		index++;
-	}
-	if (!line && !index)
-		return (print_error(EMPTY_FILE, LOCAL_ERROR));
-	if (index != 2)
-		return (free (line), print_error(WRONG_C, LOCAL_ERROR));
-	return (SUCCESS);
-}*/

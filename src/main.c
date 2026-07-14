@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:41 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 00:18:05 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:34:40 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,4 @@ int	main(int argc, char **argv)
 	cub3d_engine_start(&scene);
 	free(scene.row_lengths);
 	return (0);
-	//configure_mlx_set_up(&the_game);
 }

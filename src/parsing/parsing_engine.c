@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:01:27 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 00:23:45 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:33:01 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void parsing_engine(t_game *the_game, char **argv)
 		exit_error(the_game);
 	if (figure_sections(the_game, the_game->fd) != SUCCESS)
 		exit_error(the_game);
-	if (parse_map(the_game, the_game->fd) != SUCCESS)//we leave the map as it is
+	if (parse_map(the_game, the_game->fd) != SUCCESS)
 		exit_error(the_game);
 	close(the_game->fd);
 	the_game->fd = -1;

@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:11:57 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 11:37:12 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:33:16 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int word_counter(char *line, int start)
 	count = 0;
 	while (line[start] != '\0')
 	{
-		start = ignore_spaces(line, start, 0);  //usar índice absoluto
+		start = ignore_spaces(line, start, 0);
 		if (line[start] == '\0')
 			break;
 		count++;
@@ -95,13 +95,13 @@ int calculate_width_height(t_map *map)
 	while (map->grid[i])
 	{
 		len = ft_strlen(map->grid[i]);
-		if (len == 0)// la línea vacía
+		if (len == 0)
 			return (ERROR);
 		if (len > map->width)
 			map->width = len;
 		i++;
 	}
-	if (i == 0)//o el mapa esta vacio error
+	if (i == 0)
 		return (ERROR);
 	map->height = i;
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:19:00 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 00:24:06 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:34:35 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	free_map(t_map *map)
 		free(map->grid);
 		map->grid = NULL;
 	}
-	free(map->lines);   // es un único bloque reallocado, no hay que iterar
+	free(map->lines);
 	map->lines = NULL;
 }
 

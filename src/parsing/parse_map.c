@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 22:39:06 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 11:36:48 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:32:33 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	check_line(char *map_line, int *line_type, t_rules *rules)
 
 	*line_type = FALSE;
 	len = ft_strlen(map_line);
-	if (len == 0) //check that is not empty
+	if (len == 0)
 		return (print_error(WRONG_M, LOCAL_ERROR));
 	spaces_at_left = ignore_spaces(map_line, 0, 0);
 	spaces_at_right = ignore_spaces(map_line, len - 1, 1);
@@ -124,8 +124,6 @@ int	parse_map(t_game *the_game, int fd)
 		free (line);
 		index++;
 	}
-	//if (examine_line(line, &the_game->map.lines->line_type, &rules) == ERROR)
-	//	return (free(line), ERROR);
 	if (calculate_width_height(&the_game->map) == ERROR)
 		return (free (line), print_error(WRONG_M, LOCAL_ERROR));
 	return (SUCCESS);

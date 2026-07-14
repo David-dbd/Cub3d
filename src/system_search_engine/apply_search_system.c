@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 17:19:20 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 00:23:51 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:33:47 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	search_system_engine(t_game *the_game)
 			if (the_game->map.grid[row][col] == ' ' 
 				|| the_game->map.grid[row][col] == '\t')
 			{
-				if (figure_context(the_game, col, the_game->map.lines[row], row) == ERROR) //comparamos el index del espacio actual (col) vs el start y end reales de la linea. No enviamos el [row][col] porque eso es un char y un un index //pasamos el index y el str ya que si pasamos el index como ptr solo podemos acceder a lo que se encuentra despues y no antes
+				if (figure_context(the_game, col, 
+					the_game->map.lines[row], row) == ERROR)
 					exit_error(the_game);
 			}
 			col++;

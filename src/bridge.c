@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 11:21:35 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 00:23:23 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:34:19 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void	build_scene(t_game *the_game, t_cub3d_scene *scene)
 	scene->player_x = the_game->player.x;
 	scene->player_y = the_game->player.y;
 	scene->player_dir = the_game->player.start_dir;
-	scene->screen_width = 0;   // 0 -> el motor aplica CUB3D_DEFAULT_WIDTH/HEIGHT
+	scene->screen_width = 0;
 	scene->screen_height = 0;
 }

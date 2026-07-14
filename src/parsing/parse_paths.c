@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 22:32:31 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 23:59:41 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:32:56 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ static int	open_and_compare(char *line,char *orientation, char **path)
 	int		path_len;
 
 	spaces_left = 0;
-	if (word_counter(line, 0) != 2)// "NO path.xpm hello bye.hello"
+	if (word_counter(line, 0) != 2)
 		return (print_error(WRONG_P, LOCAL_ERROR));
 	spaces_left = ignore_spaces(line, 0, 0);
-	if (ft_strncmp(line + spaces_left, orientation, 3) != 0) //we validate the ori.
+	if (ft_strncmp(line + spaces_left, orientation, 3) != 0)
 		return (print_error(WRONG_P, LOCAL_ERROR));
-	spaces_left = ignore_spaces(line, spaces_left + 3, 0); //from "NO "
+	spaces_left = ignore_spaces(line, spaces_left + 3, 0);
 	spaces_right = ignore_spaces(line, ft_strlen(line) - 1, 1);
-	*path = ft_substr(line, spaces_left, spaces_right - spaces_left + 1);//we copy the path
+	*path = ft_substr(line, spaces_left, spaces_right - spaces_left + 1);
 	if (!*path)
 		return (print_error(NULL, SYSTEM_CALL));
 	path_len = ft_strlen(*path);
@@ -74,25 +74,3 @@ int parse_paths(t_game *the_game, char *line, int index)
 	free(path);
 	return (SUCCESS);
 }
-
-	/*
-	while ((line = get_next_line(cub_fd)) != NULL && index < 4)
-	{
-		error_track = open_and_compare(line, orientation[index], &path);
-		if (error_track != SUCCESS)
-			return (error_track);
-		error_track = copy_path(the_game, path, index);
-		if (error_track != SUCCESS)
-			return (free (line),free (path), error_track);
-		free (line);
-		free (path);
-		line = NULL;
-		index++;
-	}
-	if (!line && !index)
-		return (print_error(EMPTY_FILE, LOCAL_ERROR));
-	if (index != 4)//in case there wasnt all 4 lines
-		return (free (line),free (path), print_error(WRONG_F, LOCAL_ERROR));
-	return (SUCCESS);
-	*/
-
