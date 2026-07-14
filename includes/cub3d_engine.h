@@ -13,8 +13,6 @@
 #ifndef CUB3D_ENGINE_H
 # define CUB3D_ENGINE_H
 
-# include "cub3d.h"
-
 # define CUB3D_DEFAULT_WIDTH 1280
 # define CUB3D_DEFAULT_HEIGHT 720
 
@@ -40,7 +38,7 @@ typedef struct s_cub3d_scene
 	char	player_dir;
 	int		screen_width;
 	int		screen_height;
-	t_game	*the_game;
+	struct s_game	*the_game;
 }	t_cub3d_scene;
 
 int		cub3d_engine_start(t_cub3d_scene *scene);
