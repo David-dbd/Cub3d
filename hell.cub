@@ -1,8 +1,8 @@
 C     50,                     50, 50    
-      SO tex/test/east.png
-NO        tex/test/north.png
-WE   tex/test/west.png
-         EA tex/test/south.png      
+      SO assets/south.xmp
+NO        assets/north.xmp
+WE   assets/west.xmp
+         EA assets/east.xmp
 
       F 50,      50, 50
 
