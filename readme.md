@@ -1,27 +1,26 @@
-Rules for the proyect:
+/*
+ ** mlx_string_put.c for MiniLibX in 
+ ** 
+ ** Made by Charlie Root
+ ** Login   <ol@epitech.net>
+ ** 
+ ** Started on  Mon Jul 31 19:01:33 2000 Charlie Root
+** Last update Tue Sep 25 17:11:47 2001 Charlie Root
+ */
 
-1. Always push to your branch (never to main)
-2. Only push to main when both of us agree
-3. Comments on every function to explain the logic and easy read
 
-TODO:
+#include	"mlx_int.h"
 
-* DAVID: Infraestructure and Backend
 
-Parsing
 
-Inicializar MLX
-
-Cargar texturas XPM
-
-Crear framebuffer
-
-* Pep: Matemathics, visual engine - frontend
-
-Raycasting DDA
-
-Loop del juego:
-
-(eventos + render)
-
-Movimiento y colisiones
+int		mlx_string_put(t_xvar *xvar,t_win_list *win,
+			       int x,int y,int color,char *string)
+{
+   XGCValues	xgcv;
+   
+   xgcv.foreground = mlx_int_get_good_color(xvar,color);
+   XChangeGC(xvar->display,win->gc,GCForeground,&xgcv);
+   XDrawString(xvar->display,win->window,win->gc,x,y,string,strlen(string));
+   if (xvar->do_flush)
+     XFlush(xvar->display);
+}
