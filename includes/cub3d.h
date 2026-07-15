@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:47 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 00:23:10 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/15 11:10:19 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int		search_bottom(t_map *map, int space_i, t_line_data *lines, int context);
 //error
 void	exit_error(t_game *the_game);
 int		print_error(char *error_message, int error_type);
+void	parse_clean_up(t_game *the_game);
 
 //init_data
 void	init_data(t_game *the_game);

@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 01:05:59 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 11:36:34 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/15 10:44:29 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int	figure_sections(t_game *the_game, int cub_fd)
 	int		colors_flag[2] = {1, 1};
 
 	index = 0;
-	line = NULL;
 	while (check_flags(orien_flag, colors_flag) 
 		&& (line = get_next_line(cub_fd)) != NULL)
 	{
@@ -110,7 +109,7 @@ int	figure_sections(t_game *the_game, int cub_fd)
 		free(line);
 		index++;
 	}
-	if (!line && !index) //añadir una funcion que revise si ambos arr_flags estan en 0 completamente, meaning we had all matches
+	if (!line && !index)
 		return (print_error(EMPTY_FILE, LOCAL_ERROR));
 	return (SUCCESS);
 }

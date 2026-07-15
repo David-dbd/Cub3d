@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_cleanup.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pestelle <pestelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 00:00:00 by pestelle          #+#    #+#             */
-/*   Updated: 2026/05/27 00:00:00 by pestelle         ###   ########.fr       */
+/*   Updated: 2026/07/15 11:11:44 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ void	cub3d_engine_destroy(t_cub3d_engine *engine)
 		mlx_destroy_display(engine->mlx);
 		free(engine->mlx);
 	}
+	parse_clean_up(engine->scene.the_game);
+	free(engine->scene.row_lengths);
 	free(engine);
 }

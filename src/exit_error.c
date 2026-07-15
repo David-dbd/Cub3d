@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:19:00 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 10:34:35 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/15 11:10:06 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,18 @@ static void	free_config(t_config *config)
 	}
 }
 
+void	parse_clean_up(t_game *the_game)
+{
+	free_map(&the_game->map);
+	free_config(&the_game->config);
+}
+
 void	exit_error(t_game *the_game)
 {
 	if (the_game->fd >= 0)
 		close(the_game->fd);
 	if (the_game)
-	{
-		free_map(&the_game->map);
-		free_config(&the_game->config);
-	}
+		parse_clean_up(the_game);
 	exit(STDERR_FILENO);
 }
 

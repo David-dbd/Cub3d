@@ -6,15 +6,15 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 01:29:51 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 10:46:53 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/15 11:15:45 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /*
-	Here we find the real start of each line (where the first 1 is located at) and
-	the real ending (where the last 1 is located at)
+	Here we find the real start of each line (where the first 1 is located at) 
+	and the real ending (where the last 1 is located at)
 */
 
 static void	find_start_end(char *str, t_line_data *bounds)
@@ -37,7 +37,7 @@ static int	find_each_line_index(t_game *the_game)
 	i = 0;
 	while (i < the_game->map.height)
 	{
-		find_start_end(the_game->map.grid[i], &the_game->map.lines[i]); //toma la linea en cuestion del mapa y verifica su inicio y final real
+		find_start_end(the_game->map.grid[i], &the_game->map.lines[i]);
 		the_game->map.lines[i].line_counter = i;
 		i++;
 	}
@@ -49,5 +49,4 @@ void	start_search_system(t_game *the_game)
 	if (find_each_line_index(the_game) == ERROR)
 		exit_error(the_game);
 	search_system_engine(the_game);
-	printf("\n\nVALID MAP\n\n");
 }

@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 00:00:00 by pestelle          #+#    #+#             */
-/*   Updated: 2026/07/14 12:54:36 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/15 11:08:09 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include "mlx.h"
 # include "cub3d_engine.h"
+# include "cub3d.h"
 
 # define CUB3D_EVENT_KEY_PRESS 2
 # define CUB3D_EVENT_KEY_RELEASE 3
