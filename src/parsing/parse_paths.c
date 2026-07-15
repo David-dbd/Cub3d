@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 22:32:31 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/21 17:58:16 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:05:37 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static int	copy_path(t_game *the_game, char *path, int index)
 {
@@ -33,20 +33,20 @@ static int	copy_path(t_game *the_game, char *path, int index)
 
 static int	open_and_compare(char *line,char *orientation, char **path)
 {
-	int		spaces_at_left;
-	int		spaces_at_right;
+	int		spaces_left;
+	int		spaces_right;
 	int		path_fd;
 	int		path_len;
 
-	spaces_at_left = 0;
-	if (word_counter(line, 0) != 2)// "NO path.xpm hello bye.hello"
+	spaces_left = 0;
+	if (word_counter(line, 0) != 2)
 		return (print_error(WRONG_P, LOCAL_ERROR));
-	spaces_at_left = ignore_spaces(line, 0, "right");
-	if (ft_strncmp(line + spaces_at_left, orientation, 3) != 0) //we validate the ori.
+	spaces_left = ignore_spaces(line, 0, 0);
+	if (ft_strncmp(line + spaces_left, orientation, 3) != 0)
 		return (print_error(WRONG_P, LOCAL_ERROR));
-	spaces_at_left = ignore_spaces(line, spaces_at_left + 3, "right"); //from "NO "
-	spaces_at_right = ignore_spaces(line, ft_strlen(line) - 1, "left");
-	*path = ft_substr(line, spaces_at_left, ft_strlen(line) - spaces_at_right);//we copy the path
+	spaces_left = ignore_spaces(line, spaces_left + 3, 0);
+	spaces_right = ignore_spaces(line, ft_strlen(line) - 1, 1);
+	*path = ft_substr(line, spaces_left, spaces_right - spaces_left + 1);
 	if (!*path)
 		return (print_error(NULL, SYSTEM_CALL));
 	path_len = ft_strlen(*path);
@@ -59,31 +59,18 @@ static int	open_and_compare(char *line,char *orientation, char **path)
 	return (SUCCESS);
 }
 
-int	parse_paths(t_game *the_game, int cub_fd)
+int	parse_paths(t_game *the_game, char *line, int index)
 {
-	char	*orientation[4] = {"NO ", "SO ", "WE ", "ES "};
-	char	*line;
+	char	*orientation[4] = {"NO ", "SO ", "WE ", "EA "};
 	char	*path;
-	int		index;
 	int		error_track;
 
-	index = 0;
-	while ((line = get_next_line(cub_fd)) != NULL && index < 4)
-	{
-		error_track = open_and_compare(line, orientation[index], &path);
-		if (error_track != SUCCESS)
-			return (error_track);
-		error_track = copy_path(the_game, path, index);
-		if (error_track != SUCCESS)
-			return (free (line),free (path), error_track);
-		free (line);
-		free (path);
-		line = NULL;
-		index++;
-	}
-	if (!line && !index)
-		return (print_error(EMPTY_FILE, LOCAL_ERROR));
-	if (index != 4)//in case there wasnt all 4 lines
-		return (free (line),free (path), print_error(WRONG_F, LOCAL_ERROR));
+	error_track = open_and_compare(line, orientation[index], &path);
+	if (error_track != SUCCESS)
+		return (error_track);
+	error_track = copy_path(the_game, path, index);
+	if (error_track != SUCCESS)
+		return (free(path), error_track);
+	free(path);
 	return (SUCCESS);
 }

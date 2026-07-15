@@ -6,40 +6,32 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:01:27 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/05/22 00:36:24 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:05:43 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../utils/cub3d.h"
+#include "../../includes/cub3d.h"
 
-static	void	closer_error(t_game *the_game, int fd)
+/*
+	The order for the orientation arr is: NO, SO, WE, EA
+	The order for the colors are: F, C
+	Everytime we match a line with the orientation or color we change the
+	index from 1 to 0. This way, if there was a case of NO, NO, EA, EA, instead
+	of evaluating those lines later, we check that the flag == 1. If not, we
+	know is a duplicate
+*/
+
+void	parsing_engine(t_game *the_game, char **argv)
 {
-	close(fd);
-	exit_error(the_game);
-}
-
-void parsing_engine(t_game *the_game, int argc, char **argv)
-{
-	int	fd;
-	int	error_track;
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	the_game->fd = open(argv[1], O_RDONLY);
+	if (the_game->fd == -1)
 		exit_error(the_game);
-	if (parse_paths(the_game, fd) != SUCCESS)
-		close_error(the_game, fd);
-	if (parse_colors(the_game, fd) != SUCCESS)
-		close_error(the_game, fd);
-	if (the_game->game_mode == BASIC_MODE)
-	{
-		if (parse_map_basic(the_game, fd) != SUCCESS)//we leave the map as it is
-			close_error(the_game, fd);
-	}
-	else if (the_game->game_mode == PREMIUM_MODE)//we edit the map to make it work
-	{
-		if (parse_map_premium(the_game, fd) != SUCCESS)
-			close_error(the_game, fd);
-	}
+	if (figure_sections(the_game, the_game->fd) != SUCCESS)
+		exit_error(the_game);
+	if (parse_map(the_game, the_game->fd) != SUCCESS)
+		exit_error(the_game);
+	close(the_game->fd);
+	the_game->fd = -1;
+	start_search_system(the_game);
 	fill_out_player(the_game);
-	close(fd);
 }

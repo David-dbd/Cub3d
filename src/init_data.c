@@ -6,11 +6,11 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:30:19 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/04/14 01:33:34 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/13 11:38:45 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../utils/cub3d.h"
+#include "../includes/cub3d.h"
 
 void	init_data(t_game *the_game)
 {
