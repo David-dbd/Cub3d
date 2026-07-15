@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:47 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/15 11:10:19 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/15 12:21:00 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,6 @@ void	parse_clean_up(t_game *the_game);
 void	init_data(t_game *the_game);
 
 //scene
-int		build_scene(t_game *the_game, t_cub3d_scene *scene);
+void		build_scene(t_game *the_game, t_cub3d_scene *scene);
 
 #endif
