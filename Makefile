@@ -16,7 +16,7 @@ CC = gcc
 MLX_DIR = minilibx-linux
 
 CFLAGS = -Wall -Wextra -Werror -g -Iincludes -I$(MLX_DIR)
-##SANITIZE = -fsanitize=address
+#SANITIZE = -fsanitize=address
 
 # === LIBFT === #
 LIBFT_DIR = lib/libft_plus
@@ -29,6 +29,8 @@ ifeq ($(UNAME_S),Darwin)
 	MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -lm
 else
 	MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+	CFLAGS += -fno-PIE
+	LDFLAGS += -no-pie
 endif
 
 # === COLORES === #
@@ -54,6 +56,7 @@ SRCS = \
 	$(SRC_DIR)/parsing/parse_map.c \
 	$(SRC_DIR)/parsing/extract_map_line.c \
 	$(SRC_DIR)/parsing/fill_out_player.c \
+	$(SRC_DIR)/parsing/ignore_empty_lines.c \
 	$(SRC_DIR)/parsing/utils.c \
 	$(SRC_DIR)/bridge.c \
 	$(SRC_DIR)/system_search_engine/start_search_system.c \
@@ -89,7 +92,7 @@ mlx:
 
 $(NAME): $(OBJS)
 	@echo "$(BLUE)Linking $(NAME)...$(RESET)"
-	@$(CC) $(CFLAGS) $(SANITIZE) $(OBJS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(SANITIZE) $(OBJS) $(LIBFT) $(MLX_FLAGS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)Correctly Compiled$(RESET)"
 
 obj/%.o: src/%.c

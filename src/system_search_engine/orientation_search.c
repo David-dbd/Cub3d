@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:39:42 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 10:34:04 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/16 12:58:07 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	search_top(t_map *map, int space_index, t_line_data *lines, int context)
 
 	i = space_index;
 	str_pos = lines->line_counter;
-	if (lines->line_type == TOP_LINE 
+	if (lines->line_type == TOP_LINE
 		|| context == OUTSIDE_SPACE_RIGHT || context == OUTSIDE_SPACE_LEFT)
 		return (IGNORE);
 	while (str_pos >= 0)
@@ -82,8 +82,8 @@ int	search_bottom(t_map *map, int space_index, t_line_data *lines, int context)
 
 	i = space_index;
 	str_pos = lines->line_counter;
-	if (lines->line_type == BOTTOM_LINE 
-			|| context == OUTSIDE_SPACE_RIGHT || context == OUTSIDE_SPACE_LEFT)
+	if (lines->line_type == BOTTOM_LINE
+		|| context == OUTSIDE_SPACE_RIGHT || context == OUTSIDE_SPACE_LEFT)
 		return (IGNORE);
 	while (map->grid[str_pos] != NULL)
 	{

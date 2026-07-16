@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 22:39:06 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/15 10:45:57 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/16 16:00:25 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,20 @@
 static int	is_full_line(char *line, int distance, int *full_lines)
 {
 	int	i;
+	int	wall;
 
 	i = 0;
+	wall = 0;
 	while (i < distance)
 	{
-		if (line[i] != '1' && line[i] != ' ')
+		if (line[i] != '1' && line[i] != ' ' && line[i] != '\t')
 			return (FALSE);
+		if (line[i] == '1')
+			wall++;
 		i++;
 	}
+	if (wall == 0)
+		return (FALSE);
 	*full_lines += 1;
 	return (TRUE);
 }
@@ -42,19 +48,19 @@ static int	is_mid_line(char *line, int *line_type, int distan, t_rules *rules)
 {
 	int	i;
 
-	i = 0;
-	if (*line_type == TOP_LINE || *line_type == BOTTOM_LINE 
+	i = -1;
+	if (*line_type == TOP_LINE || *line_type == BOTTOM_LINE
 		|| (*line_type == FALSE && rules->full_lines == 0))
 		return (FALSE);
 	while ((i++) < distan)
 	{
 		if ((i == 0 && line[i] != '1') || (i == distan - 1 && line[i] != '1'))
 			return (FALSE);
-		if ((i > 0 && i < distan - 1) 
-			&& (line[i] != '0' && line[i] != '1' && line[i] != ' '))
+		if ((i > 0 && i < distan - 1) && (line[i] != '0' && line[i] != '1'
+				&& line[i] != ' ' && line[i] != '\t'))
 		{
-			if (line[i] != 'N' && line[i] != 'E' && line[i] != 'S' 
-					&& line[i] != 'W')
+			if (line[i] != 'N' && line[i] != 'E' && line[i] != 'S'
+				&& line[i] != 'W')
 				return (FALSE);
 			else
 			{
@@ -79,12 +85,13 @@ static int	is_mid_line(char *line, int *line_type, int distan, t_rules *rules)
 
 static int	check_line(char *map_line, int *line_type, t_rules *rules)
 {
-	int len;
+	int	len;
 	int	spaces_at_left;
 	int	spaces_at_right;
-	int distance = 0;
+	int	distance;
 
 	*line_type = FALSE;
+	distance = 0;
 	len = ft_strlen(map_line);
 	if (len == 0)
 		return (print_error(WRONG_M, LOCAL_ERROR));
@@ -105,7 +112,7 @@ static int	check_line(char *map_line, int *line_type, t_rules *rules)
 	return (SUCCESS);
 }
 
-int	parse_map(t_game *the_game, int fd)
+int	parse_map(t_game *the_game, int fd, char *pending_line)
 {
 	t_rules	rules;
 	char	*line;
@@ -113,20 +120,21 @@ int	parse_map(t_game *the_game, int fd)
 
 	index = 0;
 	rules = (t_rules){0};
-	line = NULL;
-	while ((line = get_next_line(fd)) != NULL)
+	line = ignore_empty_lines(pending_line, fd);
+	while (line != NULL)
 	{
 		if (add_slot(&the_game->map.grid, &the_game->map.lines, index) == ERROR)
 			return (free(line), ERROR);
-		if (check_line(line, &the_game->map.lines[index].line_type, 
-			&rules) == ERROR)
+		if (check_line(line, &the_game->map.lines[index].line_type,
+				&rules) == ERROR)
 			return (free(line), ERROR);
 		if (extract_map_line(&the_game->map.grid[index], line) == ERROR)
 			return (free(line), ERROR);
-		free (line);
+		free(line);
 		index++;
+		line = get_next_line(fd);
 	}
 	if (calculate_width_height(&the_game->map) == ERROR)
-		return (free (line), print_error(WRONG_M, LOCAL_ERROR));
+		return (print_error(WRONG_M, LOCAL_ERROR));
 	return (SUCCESS);
 }

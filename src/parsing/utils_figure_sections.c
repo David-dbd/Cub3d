@@ -6,11 +6,25 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 19:01:31 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/13 11:37:09 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:19:24 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	is_empty_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
 
 int	get_path_index(char *line)
 {

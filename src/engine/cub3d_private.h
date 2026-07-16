@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 00:00:00 by pestelle          #+#    #+#             */
-/*   Updated: 2026/07/15 11:08:09 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/16 12:44:36 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ struct s_cub3d_engine
 {
 	void			*mlx;
 	void			*win;
-	t_cub3d_img	frame;
-	t_cub3d_img	textures[CUB3D_TEX_COUNT];
+	t_cub3d_img		frame;
+	t_cub3d_img		textures[CUB3D_TEX_COUNT];
 	t_cub3d_scene	scene;
 	t_cub3d_player	player;
 	t_cub3d_input	input;

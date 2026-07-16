@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 20:11:57 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 10:45:59 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/16 12:49:28 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,22 @@ int	ignore_spaces(char *line, int index, int direction)
 	else
 	{
 		while (index >= 0 && (line[index] == ' ' || line[index] == '\t'
-			|| line[index] == '\n' || line[index] == '\r'))
+				|| line[index] == '\n' || line[index] == '\r'))
 			index--;
 		return (index);
 	}
 }
 
-
 int	word_counter(char *line, int start)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (line[start] != '\0')
 	{
 		start = ignore_spaces(line, start, 0);
 		if (line[start] == '\0')
-			break;
+			break ;
 		count++;
 		while (line[start] != '\0' && line[start] != ' ' && line[start] != '\t')
 			start++;

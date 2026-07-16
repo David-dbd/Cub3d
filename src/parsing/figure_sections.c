@@ -6,23 +6,34 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 01:05:59 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/15 10:44:29 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:17:07 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+static void	helper(int *orien_flag, int *colors_flag, int *index)
+{
+	orien_flag[0] = 1;
+	orien_flag[1] = 1;
+	orien_flag[2] = 1;
+	orien_flag[3] = 1;
+	colors_flag[0] = 1;
+	colors_flag[1] = 1;
+	*index = 0;
+}
+
 static int	recognize_line(char *line, int *orientation_flag, int *colors_flag)
 {
 	int	idx;
 
-	if (ft_strlen(line) == 1 && line[0] == '\n')
+	if (is_empty_line(line))
 		return (IGNORE);
 	idx = get_path_index(line);
 	if (idx != -1)
 	{
 		if (orientation_flag[idx] == FALSE)
-			return (ERROR); // duplicado
+			return (ERROR);
 		orientation_flag[idx] = FALSE;
 		return (PATH_LINE);
 	}
@@ -30,7 +41,7 @@ static int	recognize_line(char *line, int *orientation_flag, int *colors_flag)
 	if (idx != -1)
 	{
 		if (colors_flag[idx] == FALSE)
-			return (ERROR); // duplicado
+			return (ERROR);
 		colors_flag[idx] = FALSE;
 		return (COLOR_LINE);
 	}
@@ -46,7 +57,6 @@ static int	parse_line(t_game *the_game, char *line, int result)
 		element_index = get_path_index(line);
 		if (element_index == -1)
 			return (ERROR);
-
 		if (parse_paths(the_game, line, element_index) != SUCCESS)
 			return (ERROR);
 		return (SUCCESS);
@@ -84,32 +94,31 @@ static int	check_flags(int *orientation_flag, int *colors_flag)
 	return (FALSE);
 }
 
-
-int	figure_sections(t_game *the_game, int cub_fd)
+int	figure_sections(t_game *the_game, int cub_fd, char	**line, char **pending)
 {
-	char	*line;
-	int		result;
+	int		resul;
 	int		index;
-	int		orien_flag[4] = {1, 1, 1, 1};
-	int		colors_flag[2] = {1, 1};
+	int		orien_flag[4];
+	int		colors_flag[2];
 
-	index = 0;
-	while (check_flags(orien_flag, colors_flag) 
-		&& (line = get_next_line(cub_fd)) != NULL)
+	helper(orien_flag, colors_flag, &index);
+	*line = get_next_line(cub_fd);
+	while (check_flags(orien_flag, colors_flag) && (*line != NULL))
 	{
-		result = recognize_line(line, orien_flag, colors_flag);
-		if (result == PATH_LINE || result == COLOR_LINE)
+		resul = recognize_line(*line, orien_flag, colors_flag);
+		if (resul == PATH_LINE || resul == COLOR_LINE)
 		{
-			if (parse_line(the_game, line, result) == ERROR)
-				return (free(line), ERROR);
+			if (parse_line(the_game, *line, resul) == ERROR)
+				return (free(*line), ERROR);
 		}
-		else if (result != PATH_LINE && result != COLOR_LINE 
-				&& result != IGNORE)
-			return (print_error(INVALID_C, LOCAL_ERROR), free (line), ERROR);
-		free(line);
+		else if (resul != PATH_LINE && resul != COLOR_LINE && resul != IGNORE)
+			return (print_error(INVALID_C, LOCAL_ERROR), free (*line), ERROR);
+		free(*line);
 		index++;
+		*line = get_next_line(cub_fd);
 	}
-	if (!line && !index)
+	if (!*line && !index)
 		return (print_error(EMPTY_FILE, LOCAL_ERROR));
+	*pending = *line;
 	return (SUCCESS);
 }

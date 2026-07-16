@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:41 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/15 11:12:58 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/16 12:44:08 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	validate_args(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_game	the_game;
+	t_game			the_game;
 	t_cub3d_scene	scene;
 
 	init_data(&the_game);

@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 00:36:54 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/15 11:14:55 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/16 12:53:48 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	find_plane( double *pl_x, double *pl_y, double dir_x, double dir_y)
 
 void	fill_out_player(t_game *the_game)
 {
-	find_player(the_game, the_game->map.grid, &the_game->player.x, 
+	find_player(the_game, the_game->map.grid, &the_game->player.x,
 		&the_game->player.y);
 	find_plane(&the_game->player.plane_x, &the_game->player.plane_y,
 		the_game->player.dir_x, the_game->player.dir_y);

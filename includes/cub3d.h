@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:47 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/15 12:21:00 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:17:30 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,24 @@
 
 //parsing
 void	parsing_engine(t_game *the_game, char **argv);
-int		figure_sections(t_game *the_game, int cub_fd);
+int		figure_sections(t_game *g, int cubfd, char **pending_line, char **line);
 int		parse_paths(t_game *the_game, char *line, int index);
-int		parse_map(t_game *the_game, int fd);
+int		parse_map(t_game *the_game, int fd, char *pending_line);
 int		parse_colors(t_game *the_game, char *line, int index);
 void	fill_out_player(t_game *the_game);
 int		extract_map_line(char **map_line, char *line);
 
 //utils
-int	calculate_width_height(t_map *map);
-int	add_slot(char ***map, t_line_data **lines, int index);
-int	word_counter(char *line, int start);
-int	ignore_spaces(char *line, int k, int direction);
-int	get_path_index(char *line);
-int	get_color_index(char *line);
-int	check_colors_range(int r, int g, int b);
+int		calculate_width_height(t_map *map);
+int		add_slot(char ***map, t_line_data **lines, int index);
+int		word_counter(char *line, int start);
+int		ignore_spaces(char *line, int k, int direction);
+int		get_path_index(char *line);
+int		get_color_index(char *line);
+int		check_colors_range(int r, int g, int b);
+int		is_empty_line(char *line);
+char	*ignore_empty_lines(char *line, int fd);
+
 
 //search_engine
 void	start_search_system(t_game *the_game);

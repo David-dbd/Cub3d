@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 20:57:19 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/14 10:32:23 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:35:05 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static	int	only_numbers(const char *str)
 	coma_counter = 0;
 	while (str[i] != '\0')
 	{
-		if (!ft_isdigit(str[i]) && str[i] != ',' && str[i] != ' ')
+		if (!ft_isdigit(str[i]) && str[i] != ',' && str[i] != ' '
+			&& str[i] != '\t')
 			return (0);
 		if (str[i] == ',')
 			coma_counter++;
@@ -109,10 +110,12 @@ static int	copy_colors(t_game *the_game, char *rgb_colors, char *letter)
 
 int	parse_colors(t_game *the_game, char *line, int index)
 {
-	char	*letter[2] = {"F", "C"};
+	char	*letter[2];
 	char	*rgb_colors;
 	int		error_track;
 
+	letter[0] = "F";
+	letter[1] = "C";
 	rgb_colors = NULL;
 	error_track = compare_colors(line, &rgb_colors, letter[index]);
 	if (error_track != SUCCESS)

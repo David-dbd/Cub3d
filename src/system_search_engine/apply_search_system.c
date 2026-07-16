@@ -6,11 +6,35 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 17:19:20 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/15 10:49:46 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/16 15:44:27 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static int	check_top_bottom_border(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (map->grid[0][i] != '\0')
+	{
+		if (map->grid[0][i] != '1' && map->grid[0][i] != ' '
+			&& map->grid[0][i] != '\n' && map->grid[0][i] != '\t')
+			return (print_error(WRONG_M, LOCAL_ERROR));
+		i++;
+	}
+	i = 0;
+	while (map->grid[map->height - 1][i] != '\0')
+	{
+		if (map->grid[map->height - 1][i] != '1'
+			&& map->grid[map->height - 1][i] != ' '
+			&& map->grid[map->height - 1][i] != '\t')
+			return (print_error(WRONG_M, LOCAL_ERROR));
+		i++;
+	}
+	return (SUCCESS);
+}
 
 /*
 	Here we recieve the context of the space as well as the ptr to the space
@@ -25,11 +49,11 @@ static int	search_engine(t_game *g, int line_index, int space_in, int context)
 		return (print_error(WRONG_M, LOCAL_ERROR));
 	if (search_right(&g->map, line_index, space_in, context) == ERROR)
 		return (print_error(WRONG_M, LOCAL_ERROR));
-	if (search_top(&g->map, space_in, 
-		&g->map.lines[line_index], context) == ERROR)
+	if (search_top(&g->map, space_in,
+			&g->map.lines[line_index], context) == ERROR)
 		return (print_error(WRONG_M, LOCAL_ERROR));
-	if (search_bottom(&g->map, space_in, 
-		&g->map.lines[line_index], context) == ERROR)
+	if (search_bottom(&g->map, space_in,
+			&g->map.lines[line_index], context) == ERROR)
 		return (print_error(WRONG_M, LOCAL_ERROR));
 	return (SUCCESS);
 }
@@ -57,16 +81,18 @@ void	search_system_engine(t_game *the_game)
 
 	row = 0;
 	col = 0;
+	if (check_top_bottom_border(&the_game->map) == ERROR)
+		exit_error(the_game);
 	while (the_game->map.grid[row] != NULL)
 	{
 		col = 0;
 		while (the_game->map.grid[row][col] != '\0')
 		{
-			if (the_game->map.grid[row][col] == ' ' 
+			if (the_game->map.grid[row][col] == ' '
 				|| the_game->map.grid[row][col] == '\t')
 			{
-				if (figure_conte(the_game, col, 
-					the_game->map.lines[row], row) == ERROR)
+				if (figure_conte(the_game, col,
+						the_game->map.lines[row], row) == ERROR)
 					exit_error(the_game);
 			}
 			col++;

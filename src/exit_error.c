@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 01:19:00 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/15 11:10:06 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/16 12:43:48 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	parse_clean_up(t_game *the_game)
 
 void	exit_error(t_game *the_game)
 {
+	get_next_line(-1);
 	if (the_game->fd >= 0)
 		close(the_game->fd);
 	if (the_game)
