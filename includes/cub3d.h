@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:50:47 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/16 14:17:30 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/17 12:45:32 by pestell2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@
 # define LOCAL_ERROR						-2
 
 //ERROR MESSAGES
-# define WRONG_F							"\033[1;31mError: Wrong file\033[0m\n\n"
-# define WRONG_P							"\033[1;31mError: Wrong path\033[0m\n\n"
-# define WRONG_C							"\033[1;31mError: Wrong Colors\033[0m\n\n"
-# define WRONG_M							"\033[1;31mError: Wrong Map\033[0m\n\n"
-# define INVALID_C							"\033[1;31mError: Invalid Content\033[0m\n\n"
-# define EMPTY_FILE							"\033[1;31mError: Empty file\033[0m\n\n"
-# define MLX_ISSUE							"\033[1;31mError: MLX failed\033[0m\n\n"
+# define WRONG_F		"\033[1;31mError: Wrong file\033[0m\n\n"
+# define WRONG_P		"\033[1;31mError: Wrong path\033[0m\n\n"
+# define WRONG_C		"\033[1;31mError: Wrong Colors\033[0m\n\n"
+# define WRONG_M		"\033[1;31mError: Wrong Map\033[0m\n\n"
+# define INVALID_C		"\033[1;31mError: Invalid Content\033[0m\n\n"
+# define EMPTY_FILE		"\033[1;31mError: Empty file\033[0m\n\n"
+# define MLX_ISSUE		"\033[1;31mError: MLX failed\033[0m\n\n"
 
 //BOOL
 # define TRUE								1
@@ -58,7 +58,6 @@
 # define OUTSIDE_SPACE_LEFT					7
 # define PATH_LINE							8
 # define COLOR_LINE							9
-
 
 /* ************************************************************************** */
 /*                              FUNCTIONS                                     */
@@ -84,7 +83,6 @@ int		check_colors_range(int r, int g, int b);
 int		is_empty_line(char *line);
 char	*ignore_empty_lines(char *line, int fd);
 
-
 //search_engine
 void	start_search_system(t_game *the_game);
 void	search_system_engine(t_game *the_game);
@@ -102,6 +100,6 @@ void	parse_clean_up(t_game *the_game);
 void	init_data(t_game *the_game);
 
 //scene
-void		build_scene(t_game *the_game, t_cub3d_scene *scene);
+void	build_scene(t_game *the_game, t_cub3d_scene *scene);
 
 #endif
