@@ -6,7 +6,7 @@
 #    By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/27 14:32:50 by davdiaz-          #+#    #+#              #
-#    Updated: 2026/07/17 12:04:53 by pestell2         ###   ########.fr        #
+#    Updated: 2026/07/17 12:53:42 by pestell2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,9 +102,10 @@ obj/%.o: src/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -rf obj
+	@rm -rf obj deps
 	@$(MAKE) -C $(MLX_DIR) clean
 	@echo "$(BOLD)$(RED)Objects removed$(RESET)"
+	@echo "$(BOLD)$(RED)Dependences removed$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
