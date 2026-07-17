@@ -6,7 +6,7 @@
 #    By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/27 14:32:50 by davdiaz-          #+#    #+#              #
-#    Updated: 2026/07/13                                 +#+#+#+#+#+   +#+      #
+#    Updated: 2026/07/17 12:04:53 by pestell2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME = cub3d
 CC = gcc
 MLX_DIR = minilibx-linux
 
-CFLAGS = -Wall -Wextra -Werror -g -Iincludes -I$(MLX_DIR)
-#SANITIZE = -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -MMD -MP -Iincludes -I$(MLX_DIR)
+SANITIZE = -fsanitize=address
 
 # === LIBFT === #
 LIBFT_DIR = lib/libft_plus
@@ -79,18 +79,19 @@ SRCS = \
 	$(SRC_DIR)/engine/cub3d_utils.c
 
 OBJS = $(SRCS:src/%.c=obj/%.o)
+DEPS = $(OBJS:.o=.d)
 
 # === REGLAS === #
 
-all: $(LIBFT) mlx $(NAME)
+all: $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
-mlx:
+$(MLX_DIR)/libmlx.a:
 	@$(MAKE) -C $(MLX_DIR)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(LIBFT) $(MLX_DIR)/libmlx.a
 	@echo "$(BLUE)Linking $(NAME)...$(RESET)"
 	@$(CC) $(CFLAGS) $(SANITIZE) $(OBJS) $(LIBFT) $(MLX_FLAGS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)Correctly Compiled$(RESET)"
@@ -111,5 +112,10 @@ fclean: clean
 	@echo "$(RED)Executable removed$(RESET)"
 
 re: fclean all
+
+mlx:
+	@$(MAKE) -C $(MLX_DIR)
+
+-include $(DEPS)
 
 .PHONY: all clean fclean re mlx
