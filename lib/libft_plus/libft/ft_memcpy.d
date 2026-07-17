@@ -1,3 +1,0 @@
-libft/ft_memcpy.o: libft/ft_memcpy.c libft/../libft_plus.h
-
-libft/../libft_plus.h:
