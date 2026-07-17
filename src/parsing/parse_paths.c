@@ -6,7 +6,7 @@
 /*   By: davdiaz- <davdiaz-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 22:32:31 by davdiaz-          #+#    #+#             */
-/*   Updated: 2026/07/16 12:48:17 by davdiaz-         ###   ########.fr       */
+/*   Updated: 2026/07/17 12:20:10 by davdiaz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	open_and_compare(char *line, char *orientation, char **path)
 		return (free(*path), print_error(WRONG_P, LOCAL_ERROR));
 	path_fd = open(*path, O_RDONLY);
 	if (path_fd == -1)
-		return (free(*path), SYSTEM_CALL);
+		return (free(*path), print_error(WRONG_P, LOCAL_ERROR));
 	close(path_fd);
 	return (SUCCESS);
 }
